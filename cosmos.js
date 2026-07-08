@@ -201,12 +201,13 @@ var apps = {
 };
 
 // â”€â”€ WALLPAPERS â”€â”€
+var SB_URL = 'https://vvbfmzehffthkzoikkgu.supabase.co/storage/v1/object/public';
 var wallpapers = [
-    { id: 'black-dragon',      name: 'Dark Cybertron',    file: 'wallpapers/black-dragon.mp4' },
-    { id: 'hatsune-miku',      name: 'Energon Grid',      file: 'wallpapers/hatsune-miku.mp4' },
-    { id: 'samurai-warrior',   name: 'Autobot Forge',     file: 'wallpapers/samurai-warrior.mp4' },
-    { id: 'neon-car',          name: 'Decepticon Lair',   file: 'wallpapers/neon-car.mp4' },
-    { id: 'transformer',       name: 'Transformer',       file: 'wallpapers/transformer.mp4' }
+    { id: 'black-dragon',      name: 'Dark Cybertron',    file: SB_URL + '/wallpapers/black-dragon.mp4' },
+    { id: 'hatsune-miku',      name: 'Energon Grid',      file: SB_URL + '/wallpapers/hatsune-miku.mp4' },
+    { id: 'samurai-warrior',   name: 'Autobot Forge',     file: SB_URL + '/wallpapers/samurai-warrior.mp4' },
+    { id: 'neon-car',          name: 'Decepticon Lair',   file: SB_URL + '/wallpapers/neon-car.mp4' },
+    { id: 'transformer',       name: 'Transformer',       file: SB_URL + '/wallpapers/transformer.mp4' }
 ];
 localStorage.removeItem('cybertron-wallpaper');
 var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'hatsune-miku';
@@ -244,16 +245,16 @@ var musicPlaying = false;
 var musicTrack = 0;
 var musicAudio = null;
 var musicTracks = [
-    { title: 'Yoru ni Kakeru', artist: 'YOASOBI', file: 'music/01 - YOASOBI - Yoru ni Kakeru.mp3', cover: 'music/covers/01.jpg' },
-    { title: 'Gurenge', artist: 'LiSA', file: 'music/02 - LiSA - Gurenge.mp3', cover: 'music/covers/02.jpg' },
-    { title: 'Pretender', artist: 'Official HIGE DANdism', file: 'music/03 - Official HIGE DANdism - Pretender.mp3', cover: 'music/covers/03.jpg' },
-    { title: 'Lemon', artist: 'Kenshi Yonezu', file: 'music/04 - Kenshi Yonezu - Lemon.mp3', cover: 'music/covers/04.jpg' },
-    { title: 'Usseewa', artist: 'Ado', file: 'music/05 - Ado - Usseewa.mp3', cover: 'music/covers/05.jpg' },
-    { title: 'Idol', artist: 'YOASOBI', file: 'music/06 - YOASOBI - Idol.mp3', cover: 'music/covers/06.jpg' },
-    { title: 'Shinunoga E-Wa', artist: 'Fujii Kaze', file: 'music/07 - Fujii Kaze - Shinunoga E-Wa.mp3', cover: 'music/covers/07.jpg' },
-    { title: 'Zankyosanka', artist: 'Aimer', file: 'music/08 - Aimer - Zankyosanka.mp3', cover: 'music/covers/08.jpg' },
-    { title: 'Mixed Nuts', artist: 'Official HIGE DANdism', file: 'music/09 - Official HIGE DANdism - Mixed Nuts.mp3', cover: 'music/covers/09.jpg' },
-    { title: 'Kick Back', artist: 'Kenshi Yonezu', file: 'music/10 - Kenshi Yonezu - Kick Back.mp3', cover: 'music/covers/10.jpg' }
+    { title: 'Yoru ni Kakeru', artist: 'YOASOBI', file: SB_URL + '/music/01 - YOASOBI - Yoru ni Kakeru.mp3', cover: SB_URL + '/music/covers/01.jpg' },
+    { title: 'Gurenge', artist: 'LiSA', file: SB_URL + '/music/02 - LiSA - Gurenge.mp3', cover: SB_URL + '/music/covers/02.jpg' },
+    { title: 'Pretender', artist: 'Official HIGE DANdism', file: SB_URL + '/music/03 - Official HIGE DANdism - Pretender.mp3', cover: SB_URL + '/music/covers/03.jpg' },
+    { title: 'Lemon', artist: 'Kenshi Yonezu', file: SB_URL + '/music/04 - Kenshi Yonezu - Lemon.mp3', cover: SB_URL + '/music/covers/04.jpg' },
+    { title: 'Usseewa', artist: 'Ado', file: SB_URL + '/music/05 - Ado - Usseewa.mp3', cover: SB_URL + '/music/covers/05.jpg' },
+    { title: 'Idol', artist: 'YOASOBI', file: SB_URL + '/music/06 - YOASOBI - Idol.mp3', cover: SB_URL + '/music/covers/06.jpg' },
+    { title: 'Shinunoga E-Wa', artist: 'Fujii Kaze', file: SB_URL + '/music/07 - Fujii Kaze - Shinunoga E-Wa.mp3', cover: SB_URL + '/music/covers/07.jpg' },
+    { title: 'Zankyosanka', artist: 'Aimer', file: SB_URL + '/music/08 - Aimer - Zankyosanka.mp3', cover: SB_URL + '/music/covers/08.jpg' },
+    { title: 'Mixed Nuts', artist: 'Official HIGE DANdism', file: SB_URL + '/music/09 - Official HIGE DANdism - Mixed Nuts.mp3', cover: SB_URL + '/music/covers/09.jpg' },
+    { title: 'Kick Back', artist: 'Kenshi Yonezu', file: SB_URL + '/music/10 - Kenshi Yonezu - Kick Back.mp3', cover: SB_URL + '/music/covers/10.jpg' }
 ];
 var currentPath = '/cybertron/prime';
 var filesView = 'grid';
@@ -1908,18 +1909,18 @@ function refreshMusicUI() {
 // â”€â”€ GALLERY â”€â”€
 function renderGallery(body) {
     var images = [
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.2.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.29.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.30.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.32.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.33.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.34.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.35.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.39.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.09.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.1.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.10.jpeg',
-        'gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.jpeg'
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.2.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.29.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.30.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.32.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.33.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.34.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.35.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.39.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.09.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.1.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.10.jpeg',
+        SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.27.jpeg'
     ];
     body.style.padding = '0';
     body.style.overflow = 'auto';
@@ -3033,25 +3034,25 @@ function renderCameraGallery(el) {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 var shortsVideos = [
-    'ere.mp4',
-    'iio.mp4',
-    'rrt.mp4',
-    'tuy.mp4',
-    'uui.mp4',
-    'WhatsApp Video 2026-07-06 .mp4',
-    'WhatsApp Video 2026-07-06 at 02.17.39.mp4',
-    'WhatsApp Video 2026-07-06 at 02.17.392.mp4',
-    'WhatsApp Video 2026-07-06 at 02.17.4.mp4',
-    'WhatsApp Video 2026-07-06 at 02.2.mp4',
-    'WhatsApp Video 2026-07-06 at 02.22.30.mp4',
-    'WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
-    'WhatsApp Video 2026-07-06 at 02.22.39.mp4',
-    'WhatsApp Video 2026-07-06 at 02.24..mp4',
-    'WhatsApp Video 2026-07-06 at 02.24.5.mp4',
-    'WhatsApp Video 2026-07-06 at 02.24.57.mp4',
-    'WhatsApp Video 22026-07-06 at 02.17.39.mp4',
-    'yui.mp4',
-    'yuuu.mp4'
+    SB_URL + '/shorts/ere.mp4',
+    SB_URL + '/shorts/iio.mp4',
+    SB_URL + '/shorts/rrt.mp4',
+    SB_URL + '/shorts/tuy.mp4',
+    SB_URL + '/shorts/uui.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4',
+    SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4',
+    SB_URL + '/shorts/yui.mp4',
+    SB_URL + '/shorts/yuuu.mp4'
 ];
 
 function shuffleShorts(array) {

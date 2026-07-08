@@ -1538,19 +1538,20 @@ function buildGallery(win) {
   const body = document.createElement('div');
   body.className = 'gallery-body';
 
+  const SB_URL = 'https://vvbfmzehffthkzoikkgu.supabase.co/storage/v1/object/public';
   const items = [
-    { name: 'Sunset Beach', cat: 'photos', grad: 'linear-gradient(135deg, #ff9a9e, #fecfef)' },
-    { name: 'Mountain Peak', cat: 'photos', grad: 'linear-gradient(135deg, #a18cd1, #fbc2eb)' },
-    { name: 'City Lights', cat: 'photos', grad: 'linear-gradient(135deg, #ffecd2, #fcb69f)' },
-    { name: 'Ocean Blue', cat: 'photos', grad: 'linear-gradient(135deg, #667eea, #764ba2)' },
-    { name: 'Screenshot 1', cat: 'screenshots', grad: 'linear-gradient(135deg, #43e97b, #38f9d7)' },
-    { name: 'Screenshot 2', cat: 'screenshots', grad: 'linear-gradient(135deg, #4facfe, #00f2fe)' },
-    { name: 'Screenshot 3', cat: 'screenshots', grad: 'linear-gradient(135deg, #fa709a, #fee140)' },
-    { name: 'Abstract Art', cat: 'art', grad: 'linear-gradient(135deg, #f093fb, #f5576c)' },
-    { name: 'Neon Dream', cat: 'art', grad: 'linear-gradient(135deg, #4facfe, #00f2fe)' },
-    { name: 'Pixel Art', cat: 'art', grad: 'linear-gradient(135deg, #43e97b, #38f9d7)' },
-    { name: 'Aurora', cat: 'art', grad: 'linear-gradient(135deg, #a8edea, #fed6e3)' },
-    { name: 'Digital Wave', cat: 'art', grad: 'linear-gradient(135deg, #d299c2, #fef9d7)' },
+    { name: 'Car 1', cat: 'photos', img: SB_URL + '/gallery/car1.jpg' },
+    { name: 'Car 2', cat: 'photos', img: SB_URL + '/gallery/car2.jpg' },
+    { name: 'Car 3', cat: 'photos', img: SB_URL + '/gallery/car3.jpg' },
+    { name: 'Car 4', cat: 'photos', img: SB_URL + '/gallery/car4.jpg' },
+    { name: 'Car 5', cat: 'photos', img: SB_URL + '/gallery/car5.jpg' },
+    { name: 'Car 6', cat: 'photos', img: SB_URL + '/gallery/car6.jpg' },
+    { name: 'Holo 1', cat: 'screenshots', img: SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.2.jpeg' },
+    { name: 'Holo 2', cat: 'screenshots', img: SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.29.jpeg' },
+    { name: 'Holo 3', cat: 'screenshots', img: SB_URL + '/gallery/holopictures/WhatsApp Image 2026-07-08 at 16.25.30.jpeg' },
+    { name: 'Optimus Prime', cat: 'art', img: SB_URL + '/gallery/transformers/01_optimus_prime.svg' },
+    { name: 'Megatron', cat: 'art', img: SB_URL + '/gallery/transformers/02_megatron.svg' },
+    { name: 'Bumblebee', cat: 'art', img: SB_URL + '/gallery/transformers/03_bumblebee.svg' },
   ];
 
   let filter = 'all';
@@ -1558,7 +1559,7 @@ function buildGallery(win) {
   function renderGrid() {
     const filtered = filter === 'all' ? items : items.filter(i => i.cat === filter);
     grid.innerHTML = filtered.map((item, idx) => `
-      <div class="gallery-item" data-idx="${items.indexOf(item)}" style="background:${item.grad}">
+      <div class="gallery-item" data-idx="${items.indexOf(item)}" style="background:url('${item.img}') center/cover">
         <div class="gallery-overlay">
           <div class="gallery-name">${item.name}</div>
           <div class="gallery-cat">${item.cat}</div>
@@ -1576,7 +1577,7 @@ function buildGallery(win) {
 
   function openModal(item) {
     modal.style.display = 'flex';
-    modalInner.style.background = item.grad;
+    modalInner.style.background = item.img ? `url('${item.img}') center/contain no-repeat var(--bg-deep)` : item.grad;
     modalTitle.textContent = item.name;
     modalCat.textContent = item.cat;
   }
