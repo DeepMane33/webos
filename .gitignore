@@ -1,0 +1,23 @@
+# Wakatime
+.wakatime-project
+.wakatime.project
+
+# Playwright MCP
+.playwright-mcp/
+
+# Server logs
+server_output.log
+
+# Media - gallery, music, videos, wallpapers
+gallery/
+music/
+shorts/
+wallpapers/
+
+# Image files (boot screen, wallpapers, cat images, etc.)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
