@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════
+﻿/* ═══════════════════════════════════════
    CYBERTRON OS — TRANSFORMERS REDESIGN
    Metallic · Energon-Glow · Mechanical
    ═══════════════════════════════════════ */
@@ -429,10 +429,9 @@ body::after {
     padding: 16px;
     text-align: center;
     color: var(--text-dim);
-    font-size: 12px;
-}
-
-/* ── Right Panel (Clock + Calendar) ── */
+    font-size/* ═══════════════════════════════════════
+   Right Panel (Clock + Calendar)
+   ═══════════════════════════════════════ */
 .right-panel {
     position: absolute;
     top: 50%;
@@ -445,26 +444,27 @@ body::after {
     pointer-events: all;
 }
 .right-panel-box {
-    background: rgba(10, 14, 20, 0.5);
+    background: rgba(10, 14, 20, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    padding: 16px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+.clock-box {
+    padding: 20px 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    width: 180px;
 }
-
-/* ── Cyber Clock (Round Analog) ── */
 .cyber-clock-face {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(15, 15, 30, 0.4);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    background: rgba(15, 15, 30, 0.3);
     position: relative;
 }
 .cyber-clock-dot {
@@ -483,25 +483,25 @@ body::after {
     bottom: 50%;
     left: 50%;
     transform-origin: bottom center;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 .cyber-clock-hour {
     width: 2px;
-    height: 20px;
+    height: 22px;
     background: var(--text);
     margin-left: -1px;
     z-index: 2;
 }
 .cyber-clock-minute {
     width: 1.5px;
-    height: 28px;
+    height: 30px;
     background: var(--text-dim);
     margin-left: -0.75px;
     z-index: 2;
 }
 .cyber-clock-second {
     width: 1px;
-    height: 32px;
+    height: 34px;
     background: var(--accent);
     margin-left: -0.5px;
     z-index: 2;
@@ -512,79 +512,96 @@ body::after {
 }
 .cyber-clock-mark {
     position: absolute;
-    width: 1px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.15);
-    top: 4px;
+    width: 1.5px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    top: 5px;
     left: 50%;
-    transform-origin: 0 41px;
+    transform-origin: 0 45px;
 }
 .cyber-clock-mark.major {
-    height: 5px;
-    width: 1.5px;
+    height: 6px;
+    width: 2px;
     margin-left: -0.25px;
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.4);
 }
 .cyber-clock-digital {
     font-family: var(--font-mono);
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-size: 18px;
+    letter-spacing: 3px;
     color: var(--text);
     text-align: center;
+    margin-top: 4px;
 }
 .cyber-clock-date {
     font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 10px;
+    letter-spacing: 3px;
     color: var(--text-dim);
     text-transform: uppercase;
     text-align: center;
 }
-
-/* ── Mini Calendar ── */
-.mini-calendar {
-    padding: 16px;
+.calendar-box {
+    padding: 16px 20px 14px;
     width: 200px;
 }
+.cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.cal-nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+.cal-nav-btn:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.06);
+}
 .cal-header {
-    font-family: var(--font-mono);
-    font-size: 12px;
+    font-family: var(--font);
+    font-size: 13px;
     letter-spacing: 2px;
     color: var(--text);
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 12px;
-    font-weight: 600;
+    font-weight: 700;
 }
 .cal-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0;
     text-align: center;
     margin-bottom: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 .cal-weekday {
     font-size: 10px;
     color: var(--text-dim);
     font-weight: 600;
-    padding: 4px 0;
     letter-spacing: 1px;
 }
 .cal-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
+    gap: 2px;
     text-align: center;
 }
 .cal-day {
     font-size: 11px;
     color: var(--text);
-    padding: 6px 0;
-    border-radius: 6px;
+    padding: 7px 0;
+    border-radius: 8px;
     cursor: default;
     transition: background 0.15s;
+    font-weight: 500;
 }
 .cal-day:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -593,10 +610,13 @@ body::after {
     background: var(--accent);
     color: #fff;
     font-weight: 700;
+    border-radius: 50%;
 }
 .cal-day.other {
     color: var(--text-muted);
     opacity: 0.35;
+}
+: 0.35;
 }
 
 /* ── Desktop Branding ── */

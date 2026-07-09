@@ -424,6 +424,9 @@ function initClock() {
     var days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     var shortDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    var fullMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var calMonth = new Date().getMonth();
+    var calYear = new Date().getFullYear();
 
     // Generate clock marks
     var marksContainer = document.getElementById('cyber-clock-marks');
@@ -436,19 +439,23 @@ function initClock() {
         }
     }
 
-    // Render mini calendar
+    // Render mini calendar with navigation
     function renderCalendar() {
         var cal = document.getElementById('mini-calendar');
         if (!cal) return;
         var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth();
         var today = now.getDate();
-        var firstDay = new Date(year, month, 1).getDay();
-        var daysInMonth = new Date(year, month + 1, 0).getDate();
-        var daysInPrev = new Date(year, month, 0).getDate();
+        var thisMonth = now.getMonth();
+        var thisYear = now.getFullYear();
+        var firstDay = new Date(calYear, calMonth, 1).getDay();
+        var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+        var daysInPrev = new Date(calYear, calMonth, 0).getDate();
 
-        var html = '<div class="cal-header">' + months[month] + ' ' + year + '</div>';
+        var html = '<div class="cal-nav">';
+        html += '<button class="cal-nav-btn" id="cal-prev">&#8249;</button>';
+        html += '<div class="cal-header">' + fullMonths[calMonth] + ' ' + calYear + '</div>';
+        html += '<button class="cal-nav-btn" id="cal-next">&#8250;</button>';
+        html += '</div>';
         html += '<div class="cal-weekdays">';
         for (var d = 0; d < 7; d++) html += '<div class="cal-weekday">' + shortDays[d] + '</div>';
         html += '</div><div class="cal-days">';
@@ -457,7 +464,8 @@ function initClock() {
             html += '<div class="cal-day other">' + (daysInPrev - i) + '</div>';
         }
         for (var d = 1; d <= daysInMonth; d++) {
-            html += '<div class="cal-day' + (d === today ? ' today' : '') + '">' + d + '</div>';
+            var isToday = (d === today && calMonth === thisMonth && calYear === thisYear);
+            html += '<div class="cal-day' + (isToday ? ' today' : '') + '">' + d + '</div>';
         }
         var remaining = 42 - (firstDay + daysInMonth);
         for (var d = 1; d <= remaining; d++) {
@@ -465,6 +473,18 @@ function initClock() {
         }
         html += '</div>';
         cal.innerHTML = html;
+
+        // Navigation handlers
+        document.getElementById('cal-prev').addEventListener('click', function() {
+            calMonth--;
+            if (calMonth < 0) { calMonth = 11; calYear--; }
+            renderCalendar();
+        });
+        document.getElementById('cal-next').addEventListener('click', function() {
+            calMonth++;
+            if (calMonth > 11) { calMonth = 0; calYear++; }
+            renderCalendar();
+        });
     }
 
     renderCalendar();
@@ -492,9 +512,11 @@ function initClock() {
         if (minHand) minHand.style.transform = 'rotate(' + minDeg + 'deg)';
         if (secHand) secHand.style.transform = 'rotate(' + secDeg + 'deg)';
 
-        // Digital time
+        // Digital time with AM/PM
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        var h12 = h % 12 || 12;
         var digital = document.getElementById('cyber-clock-digital');
-        if (digital) digital.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+        if (digital) digital.textContent = String(h12).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ' ' + ampm;
 
         // Date
         var dateEl = document.getElementById('cyber-clock-date');
