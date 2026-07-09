@@ -364,14 +364,7 @@ function unlockDesktop() {
     }, 500);
 }
 
-function lockScreen() {
-    CyberSound.lock();
-    closeStartMenu();
-    closeAllWindows();
-    document.getElementById('desktop').classList.add('hidden');
-    showLockScreen();
-    document.getElementById('desktop').classList.remove('hidden');
-}
+
 
 // â”€â”€ Lock input handler â”€â”€
 document.addEventListener('DOMContentLoaded', function() {
@@ -1538,15 +1531,7 @@ function initDesktopSelection() {
 // SHUTDOWN & RESTART
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-function showShutdown() {
-    closeStartMenu();
-    document.getElementById('shutdown-screen').classList.remove('hidden');
-    // Update shutdown text
-    var shutdownContent = document.querySelector('.shutdown-content');
-    if (shutdownContent) {
-        shutdownContent.innerHTML = '<h1>CYBERTRON</h1><p>Deactivating spark core...</p><div class="shutdown-spinner"></div>';
-    }
-}
+
 
 function showBootScreen() {
     closeAllWindows();
