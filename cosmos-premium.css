@@ -314,6 +314,31 @@ body::after {
     background: #000;
 }
 
+.desktop-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(60px);
+    transition: transform 0.4s ease-out;
+    z-index: 1;
+}
+.desktop-orb-1 {
+    top: 10%; right: 15%;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(155, 89, 182, 0.06) 0%, rgba(107, 63, 160, 0.03) 40%, transparent 70%);
+}
+.desktop-orb-2 {
+    bottom: 20%; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, rgba(107, 63, 160, 0.02) 40%, transparent 70%);
+}
+.desktop-overlay {
+    position: absolute; inset: 0;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(6, 8, 12, 0.15) 0%, rgba(6, 8, 12, 0.3) 100%);
+    pointer-events: none;
+}
+
 /* ── Desktop Branding ── */
 #desktop-branding {
     position: absolute;

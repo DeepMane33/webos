@@ -490,7 +490,7 @@ function loadWallpaper(wpId) {
             video.pause();
             video.removeAttribute('src');
             video.load();
-            if (bg) { bg.style.display = ''; bg.style.backgroundImage = ''; bg.style.backgroundSize = ''; }
+            if (bg) { bg.style.display = ''; bg.style.backgroundImage = ''; bg.style.backgroundSize = ''; bg.style.transform = ''; }
         }, 800);
         return;
     }
@@ -510,12 +510,14 @@ function loadWallpaper(wpId) {
         if (bg) {
             bg.style.display = 'block';
             bg.style.backgroundImage = 'url(' + wp.file + ')';
-            bg.style.backgroundSize = '110%';
+            bg.style.backgroundSize = 'cover';
             bg.style.backgroundPosition = 'center';
+            bg.style.transform = 'scale(1.1)';
+            bg.style.transition = 'transform 0.3s ease-out';
         }
     } else {
         window._parallaxEnabled = false;
-        if (bg) { bg.style.display = 'none'; bg.style.backgroundImage = ''; }
+        if (bg) { bg.style.display = 'none'; bg.style.backgroundImage = ''; bg.style.transform = ''; }
         video.classList.remove('active');
         setTimeout(function() {
             video.src = wp.file;
@@ -529,15 +531,19 @@ function loadWallpaper(wpId) {
     }
 }
 
-// Parallax effect for static wallpapers
+// Parallax effect for static wallpapers (MewoOS style)
 window._parallaxEnabled = false;
 document.addEventListener('mousemove', function(e) {
     if (!window._parallaxEnabled) return;
     var bg = document.getElementById('desktop-bg');
     if (!bg || !bg.style.backgroundImage) return;
-    var x = (e.clientX / window.innerWidth - 0.5) * 20;
-    var y = (e.clientY / window.innerHeight - 0.5) * 20;
-    bg.style.backgroundPosition = 'calc(50% + ' + x + 'px) calc(50% + ' + y + 'px)';
+    var cx = e.clientX / window.innerWidth - 0.5;
+    var cy = e.clientY / window.innerHeight - 0.5;
+    bg.style.transform = 'scale(1.1) translate(' + (cx * -20) + 'px, ' + (cy * -20) + 'px)';
+    var orb1 = document.querySelector('.desktop-orb-1');
+    var orb2 = document.querySelector('.desktop-orb-2');
+    if (orb1) orb1.style.transform = 'translate(' + (cx * 40) + 'px, ' + (cy * 40) + 'px)';
+    if (orb2) orb2.style.transform = 'translate(' + (cx * 30) + 'px, ' + (cy * 30) + 'px)';
 });
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
