@@ -9,21 +9,13 @@
 </head>
 <body>
 
-    <!-- BOOT SCREEN -->
-    <div id="boot-screen">
-        <div class="boot-logo">&#9889;</div>
-        <h1 class="boot-title">CYBERTRON</h1>
+            <h1 class="boot-title">CYBERTRON</h1>
         <div class="boot-subtitle">OPERATING SYSTEM</div>
         <div class="boot-progress"><div class="boot-progress-bar"></div></div>
         <div class="boot-status">INITIALIZING SPARK CORE...</div>
     </div>
 
-    <!-- LOCK SCREEN -->
-    <div id="lock-screen" class="hidden">
-        <div class="lock-bg">
-            <img src="weboslock.jpeg" alt="lock background">
-        </div>
-        <div class="lock-content">
+            <div class="lock-content">
             <div class="lock-brand">CYBERTRON OS</div>
             <div class="lock-time" id="lock-time">00:00</div>
             <div class="lock-date" id="lock-date">Loading...</div>
@@ -38,7 +30,7 @@
     </div>
 
     <!-- DESKTOP -->
-    <div id="desktop" class="hidden">
+    <div id="desktop">
 
         <!-- VIDEO WALLPAPER -->
         <div id="wallpaper-container">
@@ -346,7 +338,7 @@
         <div class="toast-container" id="toast-container"></div>
     </div>
 
-    <script src="supabase-config.js"></script>
-    <script src="cosmos.js"></script>
+    
+    <script>function boot(){initDesktop();}</script><script src="cosmos.js"></script>
 </body>
 </html>
