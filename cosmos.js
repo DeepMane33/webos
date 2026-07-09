@@ -3033,26 +3033,32 @@ function renderCameraGallery(el) {
 // SHORTS / REELS APP - Local videos from shorts folder
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
+function encodeShortUrl(url) {
+    var parts = url.split('/');
+    var file = parts.pop();
+    return parts.join('/') + '/' + encodeURIComponent(file);
+}
+
 var shortsVideos = [
-    SB_URL + '/shorts/ere.mp4',
-    SB_URL + '/shorts/iio.mp4',
-    SB_URL + '/shorts/rrt.mp4',
-    SB_URL + '/shorts/tuy.mp4',
-    SB_URL + '/shorts/uui.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4',
-    SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4',
-    SB_URL + '/shorts/yui.mp4',
-    SB_URL + '/shorts/yuuu.mp4'
+    encodeShortUrl(SB_URL + '/shorts/ere.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/iio.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/rrt.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/tuy.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/uui.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/yui.mp4'),
+    encodeShortUrl(SB_URL + '/shorts/yuuu.mp4')
 ];
 
 function shuffleShorts(array) {
@@ -3092,7 +3098,8 @@ function renderShorts(body) {
     var progressInterval = null;
 
     function getVideoTitle(filename) {
-        return filename
+        var decoded = decodeURIComponent(filename).split('/').pop();
+        return decoded
             .replace('.mp4', '')
             .replace(/WhatsApp Video 2026-07-06 at? ?/, '')
             .replace(/WhatsApp Video 22026-07-06 at? ?/, '');
@@ -3106,7 +3113,7 @@ function renderShorts(body) {
         feed.innerHTML =
             '<div class="shorts-reel">' +
                 '<video class="shorts-video" ' +
-                    'src="shorts/' + encodeURIComponent(videoFile) + '" ' +
+                    'src="' + videoFile + '" ' +
                     'playsinline loop preload="metadata" autoplay>' +
                 '</video>' +
                 '<div class="shorts-loading">Loading...</div>' +

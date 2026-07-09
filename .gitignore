@@ -21,3 +21,12 @@ wallpapers/
 *.gif
 *.svg
 *.ico
+
+# Supabase config
+supabase-config.js
+
+# Vercel
+.vercel
+
+# Devlogs
+devlog*.md
