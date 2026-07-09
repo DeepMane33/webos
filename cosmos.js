@@ -321,35 +321,7 @@ function addDesktopBranding() {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function boot() {
-    CyberSound.boot();
-    var bar = document.querySelector('.boot-progress-bar');
-    var status = document.querySelector('.boot-status');
-    var steps = [
-        { pct: 15, text: 'INITIALIZING SPARK CORE...' },
-        { pct: 35, text: 'LOADING ENERGON GRID...' },
-        { pct: 55, text: 'ACTIVATING DESKTOP SYSTEMS...' },
-        { pct: 75, text: 'CALIBRATING OPTICS...' },
-        { pct: 90, text: 'ESTABLISHING COMMS LINK...' },
-        { pct: 100, text: 'SYSTEMS ONLINE. ROLL OUT.' }
-    ];
-    var i = 0;
-    var interval = setInterval(function() {
-        if (i < steps.length) {
-            bar.style.width = steps[i].pct + '%';
-            status.textContent = steps[i].text;
-            i++;
-        } else {
-            clearInterval(interval);
-            setTimeout(function() {
-                var bootScreen = document.getElementById('boot-screen');
-                bootScreen.classList.add('fade-out');
-                setTimeout(function() {
-                    bootScreen.classList.add('hidden');
-                    showLockScreen();
-                }, 600);
-            }, 300);
-        }
-    }, 350);
+    initDesktop();
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
