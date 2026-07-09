@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════
+﻿/* ═══════════════════════════════════════
    NOVA OS 3.0 — Premium Design System
    ═══════════════════════════════════════ */
 
@@ -80,13 +80,6 @@
     --duration-normal: 250ms;
     --duration-slow: 400ms;
 
-    /* ── Dock ── */
-    --dock-size: 58px;
-    --dock-icon-size: 44px;
-    --dock-magnify: 62px;
-    --dock-gap: 6px;
-    --dock-padding: 10px;
-    --dock-radius: 20px;
 }
 
 /* ── RESET ── */
@@ -322,159 +315,6 @@ body {
     background: var(--accent-subtle);
     pointer-events: none;
     display: none;
-}
-
-/* ═══════════════════════════════════════
-   DOCK — macOS-Inspired
-   ═══════════════════════════════════════ */
-
-#dock-wrapper {
-    position: fixed;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 400;
-    padding: 4px 0 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    transition: all 0.3s var(--ease-out);
-}
-#dock-wrapper.hidden-dock {
-    transform: translateX(-50%) translateY(100%);
-    opacity: 0;
-}
-#dock {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: center;
-    gap: var(--dock-gap);
-    padding: var(--dock-padding) 14px;
-    max-width: 600px;
-    background: rgba(14, 14, 28, 0.78);
-    backdrop-filter: blur(var(--blur-heavy));
-    -webkit-backdrop-filter: blur(var(--blur-heavy));
-    border: 1px solid var(--border-light);
-    border-radius: var(--dock-radius);
-    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.04);
-    transition: all 0.3s var(--ease-out);
-}
-
-.dock-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.15s var(--ease-out);
-}
-.dock-icon {
-    width: var(--dock-icon-size);
-    height: var(--dock-icon-size);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    background: var(--bg-glass);
-    border: 1px solid var(--border);
-    transition: all 0.15s var(--ease-out);
-    position: relative;
-    overflow: hidden;
-}
-.dock-icon::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
-    border-radius: 12px;
-}
-.dock-item:hover .dock-icon {
-    background: rgba(255,255,255,0.1);
-    border-color: var(--border-light);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    transform: translateY(-8px) scale(1.15);
-}
-.dock-item:active .dock-icon {
-    transform: translateY(-4px) scale(1.05);
-}
-.dock-indicator {
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--text-secondary);
-    margin-top: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-.dock-item.running .dock-indicator { opacity: 1; }
-.dock-item.active .dock-indicator {
-    background: var(--accent-light);
-    box-shadow: 0 0 6px var(--accent-glow);
-}
-
-.dock-tooltip {
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background: var(--bg-panel);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    padding: 6px 12px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--text);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s var(--ease-out);
-    box-shadow: var(--shadow-sm);
-}
-.dock-item:hover .dock-tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* Dock magnification neighbor scaling */
-.dock-item.neighbor-1 .dock-icon {
-    transform: translateY(-4px) scale(1.08);
-}
-.dock-item.neighbor-2 .dock-icon {
-    transform: translateY(-2px) scale(1.03);
-}
-
-/* ── Dock Context Menu ── */
-.dock-context-menu {
-    position: fixed;
-    z-index: 9999;
-    min-width: 180px;
-    background: var(--bg-panel);
-    backdrop-filter: blur(var(--blur-heavy));
-    -webkit-backdrop-filter: blur(var(--blur-heavy));
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-xl);
-    padding: 6px;
-    animation: contextMenuIn 0.15s var(--ease-out);
-}
-@keyframes contextMenuIn {
-    from { opacity: 0; transform: scale(0.95) translateY(-4px); }
-}
-.dock-ctx-item {
-    padding: 8px 14px;
-    font-size: 0.78rem;
-    color: var(--text);
-    border-radius: var(--radius-xs);
-    cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
-    transition: background 0.1s;
-}
-.dock-ctx-item:hover { background: var(--accent); color: #fff; }
-.dock-ctx-sep {
-    height: 1px;
-    background: var(--border);
-    margin: 4px 8px;
 }
 
 /* ═══════════════════════════════════════
@@ -2491,11 +2331,8 @@ body.perf-low .cosmos-window { box-shadow: var(--shadow-sm); }
    ═══════════════════════════════════════ */
 @media (max-width: 768px) {
     :root {
-        --dock-icon-size: 38px;
-        --dock-gap: 4px;
-        --dock-padding: 8px;
-    }
-    #dock { padding: 8px 10px; }
+                }
+    
     .cosmos-window { min-width: 300px; min-height: 200px; }
     #dashboard { grid-template-columns: repeat(2, 1fr); padding: 50px 16px 16px; }
     #control-center { width: 280px; }

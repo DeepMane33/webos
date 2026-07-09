@@ -1,4 +1,4 @@
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CYBERTRON OS â€” Transformers Desktop Engine
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
@@ -211,9 +211,6 @@ var wallpapers = [
 ];
 localStorage.removeItem('cybertron-wallpaper');
 var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'hatsune-miku';
-
-// â”€â”€ DOCK APPS â”€â”€
-var dockApps = ['notes', 'calculator', 'files', 'music', 'gallery', 'browser', 'wallpaper', 'store', 'camera', 'shorts', 'settings', 'about'];
 
 // â”€â”€ DESKTOP ICONS â”€â”€
 var desktopIcons = [
@@ -574,95 +571,6 @@ function renderDesktopIcons() {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// DOCK
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-
-function renderDock() {
-    var dock = document.getElementById('dock');
-    dock.innerHTML = '';
-    for (var i = 0; i < dockApps.length; i++) {
-        var appId = dockApps[i];
-        var app = apps[appId];
-        if (!app) continue;
-        var item = document.createElement('div');
-        item.className = 'dock-item';
-        item.setAttribute('data-app', appId);
-        item.innerHTML =
-            '<div class="dock-tooltip">' + app.name + '</div>' +
-            '<div class="dock-icon">' + app.icon + '</div>' +
-            '<div class="dock-indicator"></div>';
-        (function(aid) {
-            item.addEventListener('click', function() { openApp(aid); });
-            item.addEventListener('mouseenter', function() { CyberSound.hover(); });
-            item.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                showDockContextMenu(e, aid);
-            });
-        })(appId);
-        dock.appendChild(item);
-    }
-}
-
-function updateDockIndicators() {
-    var items = document.querySelectorAll('#dock .dock-item');
-    for (var i = 0; i < items.length; i++) {
-        var appId = items[i].getAttribute('data-app');
-        var isRunning = false;
-        var isActive = false;
-        for (var j = 0; j < windows.length; j++) {
-            if (windows[j].appId === appId && !windows[j].closed) {
-                isRunning = true;
-                if (windows[j].el.classList.contains('focused')) isActive = true;
-            }
-        }
-        items[i].classList.toggle('running', isRunning);
-        items[i].classList.toggle('active', isActive);
-    }
-}
-
-function showDockContextMenu(e, appId) {
-    hideAllContextMenus();
-    var menu = document.createElement('div');
-    menu.className = 'dock-context-menu';
-    menu.style.left = e.clientX + 'px';
-    menu.style.top = (e.clientY - 10) + 'px';
-    var app = apps[appId];
-    var isRunning = false;
-    for (var i = 0; i < windows.length; i++) {
-        if (windows[i].appId === appId && !windows[i].closed) { isRunning = true; break; }
-    }
-    var html = '<div class="dock-ctx-item" onclick="openApp(\'' + appId + '\');hideAllContextMenus()">Open ' + app.name + '</div>';
-    if (isRunning) {
-        html += '<div class="dock-ctx-item" onclick="closeApp(\'' + appId + '\');hideAllContextMenus()">Close ' + app.name + '</div>';
-        html += '<div class="dock-ctx-sep"></div>';
-        html += '<div class="dock-ctx-item" onclick="closeAllWindows();hideAllContextMenus()">Close All</div>';
-    }
-    menu.innerHTML = html;
-    document.body.appendChild(menu);
-    // Adjust position if off-screen
-    var rect = menu.getBoundingClientRect();
-    if (rect.bottom > window.innerHeight) menu.style.top = (e.clientY - rect.height) + 'px';
-    if (rect.right > window.innerWidth) menu.style.left = (e.clientX - rect.width) + 'px';
-    setTimeout(function() {
-        document.addEventListener('click', function handler() {
-            menu.remove();
-            document.removeEventListener('click', handler);
-        }, { once: true });
-    }, 10);
-}
-
-function hideAllContextMenus() {
-    var menus = document.querySelectorAll('.dock-context-menu');
-    for (var i = 0; i < menus.length; i++) menus[i].remove();
-}
-
-function closeApp(appId) {
-    for (var i = windows.length - 1; i >= 0; i--) {
-        if (windows[i].appId === appId && !windows[i].closed) {
-            closeWindow(windows[i].id);
-        }
-    }
-}
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // WINDOW MANAGER
@@ -714,7 +622,6 @@ function openApp(appId) {
     el.addEventListener('mousedown', function() { focusWindow(id); });
     renderApp(appId, id);
     updateTaskbar();
-    updateDockIndicators();
     focusWindow(id);
 }
 
@@ -753,7 +660,6 @@ function closeWindow(id) {
         win.el.remove();
         windows = windows.filter(function(w) { return w.id !== id; });
         updateTaskbar();
-        updateDockIndicators();
     }, 200);
 }
 
@@ -767,7 +673,6 @@ function minimizeWindow(id) {
     win.el.classList.add('minimizing');
     setTimeout(function() { win.el.style.display = 'none'; }, 300);
     updateTaskbar();
-    updateDockIndicators();
 }
 
 function maximizeWindow(id) {
@@ -813,7 +718,6 @@ function focusWindow(id) {
         win.el.classList.add('focused');
     }
     updateTaskbar();
-    updateDockIndicators();
 }
 
 function closeAllWindows() {
@@ -1238,7 +1142,7 @@ function renderCalendar() {
 function initContextMenu() {
     document.getElementById('desktop').addEventListener('contextmenu', function(e) {
         e.preventDefault();
-        if (e.target.closest('.cosmos-window') || e.target.closest('#dock') || e.target.closest('#taskbar')) return;
+        if (e.target.closest('.cosmos-window') || e.target.closest('#taskbar')) return;
         showDesktopContextMenu(e.clientX, e.clientY);
     });
 }
@@ -1382,7 +1286,7 @@ function openInBrowser(url) {
 function getNeroResponse(msg) {
     var lower = msg.toLowerCase();
     if (lower.indexOf('hello') !== -1 || lower.indexOf('hi') !== -1) return 'Greetings, Autobot. How may I assist you today?';
-    if (lower.indexOf('wallpaper') !== -1) return 'You can change wallpapers using the Wallpaper app on the dock, or through Systems \u2192 Wallpapers. You have 4 Cybertronian backgrounds to choose from!';
+    if (lower.indexOf('wallpaper') !== -1) return 'You can change wallpapers using the Wallpaper app or through Systems \u2192 Wallpapers. You have 4 Cybertronian backgrounds to choose from!';
     if (lower.indexOf('weather') !== -1) return 'Cybertronian atmospheric readings: 22\u00B0C, clear energon skies. Humidity at 45% with light solar winds.';
     if (lower.indexOf('time') !== -1) return 'Current Cybertronian standard time: ' + new Date().toLocaleTimeString() + '.';
     if (lower.indexOf('help') !== -1) return 'I can assist with:\n\u2022 System configuration\n\u2022 App deployment\n\u2022 Energon diagnostics\n\u2022 Tactical queries\n\nJust ask, Commander!';
@@ -1444,7 +1348,7 @@ function initDesktopSelection() {
     var selecting = false, sx, sy;
 
     desktop.addEventListener('mousedown', function(e) {
-        if (e.target.closest('.cosmos-window') || e.target.closest('#dock-wrapper') || e.target.closest('#taskbar') || e.target.closest('#start-menu') || e.target.closest('.desktop-icon')) return;
+        if (e.target.closest('.cosmos-window') || e.target.closest('#taskbar') || e.target.closest('#start-menu') || e.target.closest('.desktop-icon')) return;
         if (e.button !== 0) return;
         selecting = true;
         sx = e.clientX; sy = e.clientY;
@@ -2466,7 +2370,6 @@ function initDesktop() {
     ];
     document.getElementById('desktop').classList.remove('hidden');
     renderDesktopIcons();
-    renderDock();
     initWallpaperEngine();
     initClock();
     initSystemStatus();
@@ -3033,32 +2936,26 @@ function renderCameraGallery(el) {
 // SHORTS / REELS APP - Local videos from shorts folder
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-function encodeShortUrl(url) {
-    var parts = url.split('/');
-    var file = parts.pop();
-    return parts.join('/') + '/' + encodeURIComponent(file);
-}
-
 var shortsVideos = [
-    encodeShortUrl(SB_URL + '/shorts/ere.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/iio.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/rrt.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/tuy.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/uui.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/yui.mp4'),
-    encodeShortUrl(SB_URL + '/shorts/yuuu.mp4')
+    SB_URL + '/shorts/ere.mp4',
+    SB_URL + '/shorts/iio.mp4',
+    SB_URL + '/shorts/rrt.mp4',
+    SB_URL + '/shorts/tuy.mp4',
+    SB_URL + '/shorts/uui.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4',
+    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4',
+    SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4',
+    SB_URL + '/shorts/yui.mp4',
+    SB_URL + '/shorts/yuuu.mp4'
 ];
 
 function shuffleShorts(array) {
@@ -3098,8 +2995,7 @@ function renderShorts(body) {
     var progressInterval = null;
 
     function getVideoTitle(filename) {
-        var decoded = decodeURIComponent(filename).split('/').pop();
-        return decoded
+        return filename
             .replace('.mp4', '')
             .replace(/WhatsApp Video 2026-07-06 at? ?/, '')
             .replace(/WhatsApp Video 22026-07-06 at? ?/, '');
@@ -3113,7 +3009,7 @@ function renderShorts(body) {
         feed.innerHTML =
             '<div class="shorts-reel">' +
                 '<video class="shorts-video" ' +
-                    'src="' + videoFile + '" ' +
+                    'src="shorts/' + encodeURIComponent(videoFile) + '" ' +
                     'playsinline loop preload="metadata" autoplay>' +
                 '</video>' +
                 '<div class="shorts-loading">Loading...</div>' +

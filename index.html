@@ -9,8 +9,36 @@
 </head>
 <body>
 
-<!-- DESKTOP -->
-    <div id="desktop">
+    <!-- BOOT SCREEN -->
+    <div id="boot-screen">
+        <div class="boot-logo">&#9889;</div>
+        <h1 class="boot-title">CYBERTRON</h1>
+        <div class="boot-subtitle">OPERATING SYSTEM</div>
+        <div class="boot-progress"><div class="boot-progress-bar"></div></div>
+        <div class="boot-status">INITIALIZING SPARK CORE...</div>
+    </div>
+
+    <!-- LOCK SCREEN -->
+    <div id="lock-screen" class="hidden">
+        <div class="lock-bg">
+            <img src="weboslock.jpeg" alt="lock background">
+        </div>
+        <div class="lock-content">
+            <div class="lock-brand">CYBERTRON OS</div>
+            <div class="lock-time" id="lock-time">00:00</div>
+            <div class="lock-date" id="lock-date">Loading...</div>
+            <div class="lock-avatar">⚡</div>
+            <div class="lock-user">PRIME</div>
+            <div class="lock-input-wrap">
+                <input type="password" class="lock-input" id="lock-input" placeholder="Enter to unlock" autocomplete="off">
+                <button class="lock-submit" onclick="unlockDesktop()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linelinecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+            </div>
+            <div class="lock-hint">Press Enter or click arrow to roll out</div>
+        </div>
+    </div>
+
+    <!-- DESKTOP -->
+    <div id="desktop" class="hidden">
 
         <!-- VIDEO WALLPAPER -->
         <div id="wallpaper-container">
@@ -300,11 +328,6 @@
             </div>
         </div>
 
-        <!-- DOCK -->
-        <div id="dock-wrapper">
-            <div id="dock"></div>
-        </div>
-
         <!-- SHUTDOWN SCREEN -->
         <div id="shutdown-screen" class="hidden">
             <div class="shutdown-content">
@@ -318,7 +341,7 @@
         <div class="toast-container" id="toast-container"></div>
     </div>
 
-    
-    <script>function boot(){initDesktop();}</script><script>function boot(){initDesktop();}</script><script src="cosmos.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="cosmos.js"></script>
 </body>
 </html>
