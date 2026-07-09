@@ -1361,26 +1361,7 @@ document.addEventListener('click', function(e) {
 // DASHBOARD (F12)
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-function toggleDashboard() {
-    dashboardOpen = !dashboardOpen;
-    document.getElementById('dashboard').classList.toggle('visible', dashboardOpen);
-    // Update title to Command Center
-    var dashTitle = document.querySelector('.dash-title');
-    if (dashTitle) dashTitle.textContent = 'COMMAND CENTER';
-    if (dashboardOpen) {
-        var now = new Date();
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        var dateEl = document.getElementById('dash-date');
-        var dayEl = document.getElementById('dash-day');
-        if (dateEl) dateEl.textContent = months[now.getMonth()] + ' ' + now.getDate();
-        if (dayEl) dayEl.textContent = days[now.getDay()] + ', ' + now.getFullYear();
-        var noteEl = document.getElementById('dash-note');
-        if (noteEl && notes.length > 0) noteEl.textContent = notes[0].text.substring(0, 80) + '...';
-        var musicEl = document.getElementById('dash-music');
-        if (musicEl) musicEl.textContent = musicPlaying ? musicTracks[musicTrack].title + ' - ' + musicTracks[musicTrack].artist : 'No track playing';
-    }
-}
+
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TELETRAAN SCANNER (Google Search)
@@ -1498,11 +1479,7 @@ function initKeyboardShortcuts() {
             return;
         }
         // F12: Dashboard
-        if (e.key === 'F12') {
-            e.preventDefault();
-            toggleDashboard();
-            return;
-        }
+        
         // Escape: Close panels
         if (e.key === 'Escape') {
             if (searchOpen) { closeSearch(); return; }
