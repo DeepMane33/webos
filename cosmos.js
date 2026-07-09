@@ -470,16 +470,76 @@ function initClock() {
 function initTopSearch() {
     var input = document.getElementById('top-search-input');
     if (!input) return;
-    input.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { input.blur(); input.value = ''; }
-        if (e.key === 'Enter') {
-            var q = input.value.trim().toLowerCase();
-            if (!q) return;
-            var matched = null;
-            for (var id in apps) {
-                if (apps[id].name.toLowerCase().indexOf(q) !== -1) { matched = id; break; }
+
+    // Create results dropdown
+    var results = document.createElement('div');
+    results.className = 'top-search-results';
+    results.id = 'top-search-results';
+    input.parentElement.appendChild(results);
+
+    function searchApps(q) {
+        if (!q) { results.style.display = 'none'; results.innerHTML = ''; return; }
+        var matches = [];
+        for (var id in apps) {
+            if (apps[id].name.toLowerCase().indexOf(q.toLowerCase()) !== -1) {
+                matches.push({ id: id, name: apps[id].name, icon: apps[id].icon });
             }
-            if (matched) { openApp(matched); input.value = ''; input.blur(); }
+        }
+        if (matches.length === 0) {
+            results.innerHTML = '<div class="top-search-empty">No apps found</div>';
+            results.style.display = 'block';
+            return;
+        }
+        var html = '';
+        for (var i = 0; i < matches.length; i++) {
+            html += '<div class="top-search-item" data-app="' + matches[i].id + '">' +
+                '<span class="top-search-item-icon">' + matches[i].icon + '</span>' +
+                '<span class="top-search-item-name">' + matches[i].name + '</span>' +
+                '</div>';
+        }
+        results.innerHTML = html;
+        results.style.display = 'block';
+
+        // Add click handlers
+        var items = results.querySelectorAll('.top-search-item');
+        for (var j = 0; j < items.length; j++) {
+            items[j].addEventListener('click', function() {
+                openApp(this.getAttribute('data-app'));
+                input.value = '';
+                results.style.display = 'none';
+                input.blur();
+            });
+        }
+    }
+
+    input.addEventListener('input', function() {
+        searchApps(this.value.trim());
+    });
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            input.blur();
+            input.value = '';
+            results.style.display = 'none';
+        }
+        if (e.key === 'Enter') {
+            var firstItem = results.querySelector('.top-search-item');
+            if (firstItem) {
+                openApp(firstItem.getAttribute('data-app'));
+                input.value = '';
+                results.style.display = 'none';
+                input.blur();
+            }
+        }
+    });
+
+    input.addEventListener('focus', function() {
+        if (this.value.trim()) searchApps(this.value.trim());
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.top-search')) {
+            results.style.display = 'none';
         }
     });
 }
