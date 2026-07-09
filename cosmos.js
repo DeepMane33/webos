@@ -421,6 +421,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function initClock() {
+    var days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     function update() {
         var now = new Date();
         var h = String(now.getHours()).padStart(2, '0');
@@ -428,9 +430,31 @@ function initClock() {
         var s = String(now.getSeconds()).padStart(2, '0');
         var clockEl = document.getElementById('taskbar-clock');
         if (clockEl) clockEl.textContent = h + ':' + m;
+        var cyberTime = document.getElementById('cyber-clock-time');
+        var cyberDate = document.getElementById('cyber-clock-date');
+        if (cyberTime) cyberTime.textContent = h + ':' + m + ':' + s;
+        if (cyberDate) cyberDate.textContent = days[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
     }
     update();
     setInterval(update, 1000);
+}
+
+// Top search bar
+function initTopSearch() {
+    var input = document.getElementById('top-search-input');
+    if (!input) return;
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { input.blur(); input.value = ''; }
+        if (e.key === 'Enter') {
+            var q = input.value.trim().toLowerCase();
+            if (!q) return;
+            var matched = null;
+            for (var id in apps) {
+                if (apps[id].name.toLowerCase().indexOf(q) !== -1) { matched = id; break; }
+            }
+            if (matched) { openApp(matched); input.value = ''; input.blur(); }
+        }
+    });
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -2405,6 +2429,7 @@ function initDesktop() {
     renderDesktopIcons();
     initWallpaperEngine();
     initClock();
+    initTopSearch();
     initSystemStatus();
     initContextMenu();
     initKeyboardShortcuts();

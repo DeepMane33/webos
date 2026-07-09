@@ -339,6 +339,82 @@ body::after {
     pointer-events: none;
 }
 
+/* ── Top Search Bar ── */
+.top-search {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: all;
+}
+.top-search-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 14, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 6px 16px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.top-search-inner:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+.top-search-inner svg {
+    color: var(--text-dim);
+    flex-shrink: 0;
+}
+.top-search-input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    width: 180px;
+}
+.top-search-input::placeholder {
+    color: var(--text-dim);
+}
+
+/* ── Cyber Clock ── */
+.cyber-clock {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 10;
+    text-align: right;
+    pointer-events: none;
+}
+.cyber-clock-time {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--text);
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+.cyber-clock-date {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+.cyber-clock-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent));
+    margin-left: auto;
+    margin-top: 6px;
+    opacity: 0.5;
+}
+
 /* ── Desktop Branding ── */
 #desktop-branding {
     position: absolute;
