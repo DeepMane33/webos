@@ -423,20 +423,47 @@ document.addEventListener('DOMContentLoaded', function() {
 function initClock() {
     var days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+    // Generate clock marks
+    var marksContainer = document.getElementById('cyber-clock-marks');
+    if (marksContainer) {
+        for (var i = 0; i < 12; i++) {
+            var mark = document.createElement('div');
+            mark.className = 'cyber-clock-mark' + (i % 3 === 0 ? ' major' : '');
+            mark.style.transform = 'rotate(' + (i * 30) + 'deg)';
+            marksContainer.appendChild(mark);
+        }
+    }
+
     function update() {
         var now = new Date();
-        var h = String(now.getHours()).padStart(2, '0');
-        var m = String(now.getMinutes()).padStart(2, '0');
-        var s = String(now.getSeconds()).padStart(2, '0');
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+        var ms = now.getMilliseconds();
+
+        // Taskbar clock
         var clockEl = document.getElementById('taskbar-clock');
-        if (clockEl) clockEl.textContent = h + ':' + m;
-        var cyberTime = document.getElementById('cyber-clock-time');
-        var cyberDate = document.getElementById('cyber-clock-date');
-        if (cyberTime) cyberTime.textContent = h + ':' + m + ':' + s;
-        if (cyberDate) cyberDate.textContent = days[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+        if (clockEl) clockEl.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+
+        // Analog clock hands
+        var hourDeg = (h % 12) * 30 + m * 0.5;
+        var minDeg = m * 6 + s * 0.1;
+        var secDeg = s * 6 + ms * 0.006;
+
+        var hourHand = document.getElementById('cyber-hour');
+        var minHand = document.getElementById('cyber-minute');
+        var secHand = document.getElementById('cyber-second');
+        if (hourHand) hourHand.style.transform = 'rotate(' + hourDeg + 'deg)';
+        if (minHand) minHand.style.transform = 'rotate(' + minDeg + 'deg)';
+        if (secHand) secHand.style.transform = 'rotate(' + secDeg + 'deg)';
+
+        // Digital time below clock
+        var digital = document.getElementById('cyber-clock-digital');
+        if (digital) digital.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
     }
     update();
-    setInterval(update, 1000);
+    setInterval(update, 50);
 }
 
 // Top search bar
