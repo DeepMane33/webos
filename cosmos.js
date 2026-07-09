@@ -1,4 +1,4 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CYBERTRON OS â€” Transformers Desktop Engine
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
@@ -205,6 +205,9 @@ var SB_URL = 'https://vvbfmzehffthkzoikkgu.supabase.co/storage/v1/object/public'
 var wallpapers = [
     { id: 'hatsune-miku',      name: 'Energon Grid',      file: SB_URL + '/wallpapers/hatsune-miku.mp4' },
     { id: 'neon-car',          name: 'Decepticon Lair',   file: SB_URL + '/wallpapers/neon-car.mp4' },
+    { id: 'optimus',       name: 'Optimus Prime',     file: 'wallpapers/optimus.jpg' },
+    { id: 'download2',     name: 'Cybertron Alpha',   file: 'wallpapers/download2.jpg' },
+    { id: 'download3',     name: 'Cybertron Beta',    file: 'wallpapers/download3.jpg' },
     { id: 'optimus',         name: 'Optimus Prime',     file: 'wallpapers/optimus.jpg' },
     { id: 'download2',       name: 'Cybertron Alpha',   file: 'wallpapers/download2.jpg' },
     { id: 'download3',       name: 'Cybertron Beta',    file: 'wallpapers/download3.jpg' }
