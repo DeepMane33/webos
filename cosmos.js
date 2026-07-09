@@ -205,6 +205,9 @@ var SB_URL = 'https://vvbfmzehffthkzoikkgu.supabase.co/storage/v1/object/public'
 var wallpapers = [
     { id: 'hatsune-miku',      name: 'Energon Grid',      file: SB_URL + '/wallpapers/hatsune-miku.mp4' },
     { id: 'neon-car',          name: 'Decepticon Lair',   file: SB_URL + '/wallpapers/neon-car.mp4' },
+    { id: 'optimus',         name: 'Optimus Prime',     file: 'wallpapers/optimus.jpg' },
+    { id: 'download2',       name: 'Cybertron Alpha',   file: 'wallpapers/download2.jpg' },
+    { id: 'download3',       name: 'Cybertron Beta',    file: 'wallpapers/download3.jpg' }
 ];
 localStorage.removeItem('cybertron-wallpaper');
 var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'hatsune-miku';
@@ -486,7 +489,7 @@ function loadWallpaper(wpId) {
             video.pause();
             video.removeAttribute('src');
             video.load();
-            if (bg) bg.style.display = '';
+            if (bg) { bg.style.display = ''; bg.style.backgroundImage = ''; }
         }, 800);
         return;
     }
@@ -497,19 +500,31 @@ function loadWallpaper(wpId) {
     if (!wp) return;
     currentWallpaper = wpId;
     localStorage.setItem('cybertron-wallpaper', wpId);
-    if (bg) bg.style.display = 'none';
-    video.classList.remove('active');
-    setTimeout(function() {
-        video.src = wp.file;
-        video.load();
-        video.oncanplay = function() {
-            video.play().catch(function() {});
-            video.classList.add('active');
-            video.oncanplay = null;
-        };
-    }, 400);
+    var isImage = wp.file.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+    if (isImage) {
+        video.classList.remove('active');
+        video.pause();
+        video.removeAttribute('src');
+        if (bg) {
+            bg.style.display = 'block';
+            bg.style.backgroundImage = 'url(' + wp.file + ')';
+            bg.style.backgroundSize = 'cover';
+            bg.style.backgroundPosition = 'center';
+        }
+    } else {
+        if (bg) bg.style.display = 'none';
+        video.classList.remove('active');
+        setTimeout(function() {
+            video.src = wp.file;
+            video.load();
+            video.oncanplay = function() {
+                video.play().catch(function() {});
+                video.classList.add('active');
+                video.oncanplay = null;
+            };
+        }, 400);
+    }
 }
-
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DESKTOP ICONS
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
