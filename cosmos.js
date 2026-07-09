@@ -203,11 +203,8 @@ var apps = {
 // â”€â”€ WALLPAPERS â”€â”€
 var SB_URL = 'https://vvbfmzehffthkzoikkgu.supabase.co/storage/v1/object/public';
 var wallpapers = [
-    { id: 'black-dragon',      name: 'Dark Cybertron',    file: SB_URL + '/wallpapers/black-dragon.mp4' },
     { id: 'hatsune-miku',      name: 'Energon Grid',      file: SB_URL + '/wallpapers/hatsune-miku.mp4' },
-    { id: 'samurai-warrior',   name: 'Autobot Forge',     file: SB_URL + '/wallpapers/samurai-warrior.mp4' },
     { id: 'neon-car',          name: 'Decepticon Lair',   file: SB_URL + '/wallpapers/neon-car.mp4' },
-    { id: 'transformer',       name: 'Transformer',       file: SB_URL + '/wallpapers/transformer.mp4' }
 ];
 localStorage.removeItem('cybertron-wallpaper');
 var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'hatsune-miku';
@@ -465,8 +462,8 @@ function initWallpaperEngine() {
             if (wallpapers[i].id === currentWallpaper) { validWp = true; break; }
         }
         if (!validWp) {
-            currentWallpaper = 'samurai-warrior';
-            localStorage.setItem('cybertron-wallpaper', 'samurai-warrior');
+            currentWallpaper = 'hatsune-miku';
+            localStorage.setItem('cybertron-wallpaper', 'hatsune-miku');
         }
     }
     if (currentWallpaper && currentWallpaper !== 'none') {
