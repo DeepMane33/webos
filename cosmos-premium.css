@@ -435,11 +435,11 @@ body::after {
     pointer-events: all;
 }
 .right-panel-box {
-    background: #12161D;
-    border: 1px solid var(--border);
+    background: rgba(18, 22, 29, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-sm);
-
-
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--shadow-md);
 }
 .clock-box {
