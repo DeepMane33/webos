@@ -543,52 +543,60 @@ body::after {
 
 /* ── Mini Calendar ── */
 .mini-calendar {
-    padding: 14px;
-    width: 180px;
+    padding: 16px;
+    width: 200px;
 }
 .cal-header {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text);
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 .cal-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0;
     text-align: center;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 6px;
 }
 .cal-weekday {
-    font-size: 9px;
-    color: var(--text-muted);
+    font-size: 10px;
+    color: var(--text-dim);
     font-weight: 600;
-    padding: 3px 0;
+    padding: 4px 0;
+    letter-spacing: 1px;
 }
 .cal-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 3px;
     text-align: center;
 }
 .cal-day {
-    font-size: 10px;
-    color: var(--text-dim);
-    padding: 4px 0;
-    border-radius: 4px;
+    font-size: 11px;
+    color: var(--text);
+    padding: 6px 0;
+    border-radius: 6px;
     cursor: default;
+    transition: background 0.15s;
+}
+.cal-day:hover {
+    background: rgba(255, 255, 255, 0.06);
 }
 .cal-day.today {
     background: var(--accent);
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
 }
 .cal-day.other {
     color: var(--text-muted);
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 /* ── Desktop Branding ── */
