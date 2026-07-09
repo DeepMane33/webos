@@ -1,4 +1,4 @@
-﻿/* ═══════════════════════════════════════
+/* ═══════════════════════════════════════
    CYBERTRON OS — TRANSFORMERS REDESIGN
    Metallic · Energon-Glow · Mechanical
    ═══════════════════════════════════════ */
@@ -341,14 +341,13 @@ body::after {
 /* ── Desktop Icons ── */
 #desktop-icons {
     position: absolute; top: 20px; left: 20px; right: 20px; bottom: 60px; z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 90px);
-    grid-template-rows: repeat(auto-fill, 90px);
-    gap: 6px;
-    align-content: start; justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: start;
 }
 .desktop-icon {
-    width: 80px; padding: 12px 6px 8px;
+    width: 90px; padding: 12px 6px 8px;
     text-align: center;
     border-radius: var(--radius-md);
     cursor: pointer;
