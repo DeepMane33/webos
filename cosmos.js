@@ -423,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initClock() {
     var days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    var shortDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
     // Generate clock marks
     var marksContainer = document.getElementById('cyber-clock-marks');
@@ -434,6 +435,39 @@ function initClock() {
             marksContainer.appendChild(mark);
         }
     }
+
+    // Render mini calendar
+    function renderCalendar() {
+        var cal = document.getElementById('mini-calendar');
+        if (!cal) return;
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var today = now.getDate();
+        var firstDay = new Date(year, month, 1).getDay();
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+        var daysInPrev = new Date(year, month, 0).getDate();
+
+        var html = '<div class="cal-header">' + months[month] + ' ' + year + '</div>';
+        html += '<div class="cal-weekdays">';
+        for (var d = 0; d < 7; d++) html += '<div class="cal-weekday">' + shortDays[d] + '</div>';
+        html += '</div><div class="cal-days">';
+
+        for (var i = firstDay - 1; i >= 0; i--) {
+            html += '<div class="cal-day other">' + (daysInPrev - i) + '</div>';
+        }
+        for (var d = 1; d <= daysInMonth; d++) {
+            html += '<div class="cal-day' + (d === today ? ' today' : '') + '">' + d + '</div>';
+        }
+        var remaining = 42 - (firstDay + daysInMonth);
+        for (var d = 1; d <= remaining; d++) {
+            html += '<div class="cal-day other">' + d + '</div>';
+        }
+        html += '</div>';
+        cal.innerHTML = html;
+    }
+
+    renderCalendar();
 
     function update() {
         var now = new Date();
@@ -458,9 +492,13 @@ function initClock() {
         if (minHand) minHand.style.transform = 'rotate(' + minDeg + 'deg)';
         if (secHand) secHand.style.transform = 'rotate(' + secDeg + 'deg)';
 
-        // Digital time below clock
+        // Digital time
         var digital = document.getElementById('cyber-clock-digital');
         if (digital) digital.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+
+        // Date
+        var dateEl = document.getElementById('cyber-clock-date');
+        if (dateEl) dateEl.textContent = shortDays[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()];
     }
     update();
     setInterval(update, 50);
@@ -2179,7 +2217,7 @@ function initCalendarWidget() {
     widget.innerHTML =
         '<div class="cal-widget-header" id="cal-widget-drag-handle">' +
             '<div class="cal-widget-title">' +
-                '<span class="cal-widget-title-icon">⚡</span>' +
+                '<span class="cal-widget-title-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>' +
                 '<span>STAR CALENDAR</span>' +
             '</div>' +
             '<div class="cal-widget-controls">' +
@@ -2389,10 +2427,10 @@ function initPixelCat() {
                 pixelCat.classList.toggle('pinned', catPinned);
                 if (catPinned) {
                     pixelCat.title = 'Pinned! Click to unpin';
-                    showToast('CyberCat', 'Cat pinned in place', '📌');
+                    showToast('CyberCat', 'Cat pinned in place', '[pin]');
                 } else {
                     pixelCat.title = 'Click to pin/unpin, double-click to pet!';
-                    showToast('CyberCat', 'Cat unpinned, following cursor', '🐾');
+                    showToast('CyberCat', 'Cat unpinned, following cursor', '[paw]');
                 }
             }, 250);
         }
@@ -2476,7 +2514,7 @@ function onCatPet(e) {
 function createFloatingHeart(x, y) {
     var heart = document.createElement('div');
     heart.className = 'cat-floating-heart';
-    heart.textContent = ['❤️', '💕', '💖', '💗', '😺'][Math.floor(Math.random() * 5)];
+    heart.textContent = ['<svg width=... heart ...</svg>', '*', '*', '*', '*'][Math.floor(Math.random() * 5)];
     heart.style.left = x + 'px';
     heart.style.top = y + 'px';
     heart.style.fontSize = (12 + Math.random() * 10) + 'px';
@@ -2487,7 +2525,7 @@ function createFloatingHeart(x, y) {
 function createPawPrint(x, y) {
     var paw = document.createElement('div');
     paw.className = 'cat-paw-print';
-    paw.textContent = '🐾';
+    paw.textContent = '[paw]';
     paw.style.left = (x + Math.random() * 20 - 10) + 'px';
     paw.style.top = (y + Math.random() * 20 - 10) + 'px';
     document.body.appendChild(paw);
