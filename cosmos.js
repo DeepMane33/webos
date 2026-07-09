@@ -485,11 +485,12 @@ function loadWallpaper(wpId) {
         video.classList.remove('active');
         currentWallpaper = 'none';
         localStorage.setItem('cybertron-wallpaper', 'none');
+        window._parallaxEnabled = false;
         setTimeout(function() {
             video.pause();
             video.removeAttribute('src');
             video.load();
-            if (bg) { bg.style.display = ''; bg.style.backgroundImage = ''; }
+            if (bg) { bg.style.display = ''; bg.style.backgroundImage = ''; bg.style.backgroundSize = ''; }
         }, 800);
         return;
     }
@@ -505,14 +506,16 @@ function loadWallpaper(wpId) {
         video.classList.remove('active');
         video.pause();
         video.removeAttribute('src');
+        window._parallaxEnabled = true;
         if (bg) {
             bg.style.display = 'block';
             bg.style.backgroundImage = 'url(' + wp.file + ')';
-            bg.style.backgroundSize = 'cover';
+            bg.style.backgroundSize = '110%';
             bg.style.backgroundPosition = 'center';
         }
     } else {
-        if (bg) bg.style.display = 'none';
+        window._parallaxEnabled = false;
+        if (bg) { bg.style.display = 'none'; bg.style.backgroundImage = ''; }
         video.classList.remove('active');
         setTimeout(function() {
             video.src = wp.file;
@@ -525,6 +528,17 @@ function loadWallpaper(wpId) {
         }, 400);
     }
 }
+
+// Parallax effect for static wallpapers
+window._parallaxEnabled = false;
+document.addEventListener('mousemove', function(e) {
+    if (!window._parallaxEnabled) return;
+    var bg = document.getElementById('desktop-bg');
+    if (!bg || !bg.style.backgroundImage) return;
+    var x = (e.clientX / window.innerWidth - 0.5) * 20;
+    var y = (e.clientY / window.innerHeight - 0.5) * 20;
+    bg.style.backgroundPosition = 'calc(50% + ' + x + 'px) calc(50% + ' + y + 'px)';
+});
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DESKTOP ICONS
