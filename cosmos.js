@@ -518,9 +518,13 @@ function initTopSearch() {
     function searchApps(q) {
         if (!q) { results.style.display = 'none'; results.innerHTML = ''; return; }
         var matches = [];
-        for (var id in apps) {
-            if (apps[id].name.toLowerCase().indexOf(q.toLowerCase()) !== -1) {
-                matches.push({ id: id, name: apps[id].name, icon: apps[id].icon });
+        var qLower = q.toLowerCase();
+        // Only search installed apps
+        for (var i = 0; i < storeApps.length; i++) {
+            var app = storeApps[i];
+            if (!app.installed) continue;
+            if (app.name.toLowerCase().indexOf(qLower) !== -1 || app.id.indexOf(qLower) !== -1) {
+                matches.push({ id: app.id, name: app.name, icon: app.icon });
             }
         }
         if (matches.length === 0) {
