@@ -5,6 +5,9 @@
 # Playwright MCP
 .playwright-mcp/
 
+# Vercel
+.vercel/
+
 # Server logs
 server_output.log
 
@@ -20,6 +23,9 @@ shorts/
 *.gif
 *.svg
 *.ico
+
+# Wallpapers
+wallpapers/
 
 # Devlogs
 devlog-2.md
