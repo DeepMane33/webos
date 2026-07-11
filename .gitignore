@@ -13,10 +13,23 @@ gallery/
 music/
 shorts/
 
-# Image files (boot screen, wallpapers, cat images, etc.)
+# Ignore most images but allow specific ones we need
 *.png
 *.jpg
 *.jpeg
 *.gif
 *.svg
 *.ico
+
+# Allow these specific files
+!pixelrobo.jpg
+!icons/weather.png
+!icons/chronometer.png
+!icons/sparkcore.png
+!wallpapers/carwall.jpg
+!wallpapers/punkwall.jpg
+!wallpapers/optimus.jpg
+!wallpapers/download2.jpg
+!wallpapers/download3.jpg
+!wallpapers/formula1wall.jpg
+!wallpapers/silverwall.jpg

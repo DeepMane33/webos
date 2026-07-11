@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYBERTRON OS</title>
-    <link rel="stylesheet" href="cosmos-premium.css">
+    <link rel="stylesheet" href="cosmos-premium.css?v=6">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -239,22 +239,17 @@
         <!-- TASKBAR -->
         <div id="taskbar">
             <div class="taskbar-left">
-                <button class="taskbar-btn" id="start-btn" onclick="toggleStartMenu()">
-                    <span class="start-logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
-                </button>
-                <div class="taskbar-sep"></div>
+            </div>
+            <div class="taskbar-center">
                 <div class="taskbar-apps" id="taskbar-apps"></div>
             </div>
-            <div class="taskbar-center"></div>
             <div class="taskbar-right">
                 <div class="taskbar-tray clickable" id="taskbar-weather" onclick="openApp('weather')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> 22&deg;C</div>
                 <div class="taskbar-tray" id="taskbar-battery"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><line x1="22" x2="22" y1="11" y2="13"/></svg> 87%</div>
-                <div class="taskbar-tray clickable" id="taskbar-network" onclick="toggleCC(document.getElementById('cc-wifi'),'wifi')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg></div>
-                <div class="taskbar-tray clickable" id="taskbar-volume" onclick="toggleCC(document.getElementById('cc-wifi'),'wifi')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
+                <div class="taskbar-tray clickable" id="taskbar-network"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg></div>
+                <div class="taskbar-tray clickable" id="taskbar-volume"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
                 <div class="taskbar-sep"></div>
                 <div class="taskbar-tray clickable" id="taskbar-clock" onclick="toggleCalendar()"></div>
-                <button class="taskbar-btn" onclick="toggleNotifications()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
-                <button class="taskbar-btn" onclick="toggleControlCenter()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
             </div>
         </div>
 
@@ -263,6 +258,6 @@
     </div>
 
     
-    <script src="cosmos.js"></script>
+    <script src="cosmos.js?t=1720620000"></script>
 </body>
 </html>

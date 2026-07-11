@@ -24,63 +24,70 @@ var notifications = []; // initialized in initDesktop()
 
 // â”€â”€ SVG ICONS (Lucide-style) â”€â”€
 var ICO = {
-    // Mission Log - Autobot/Transformer face insignia
-    notes: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1L6 5v4l-2 3 2 3v5h2l1 2h2v-2h2v2h2l1-2h2v-5l2-3-2-3V5l-3-4"/><path d="M8 5h8"/><path d="M9 8.5h6"/><path d="M10 12h4"/><circle cx="12" cy="16" r="1"/></svg>',
-    // Energon Calc - Calculator with 1389 display
-    calculator: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="1" width="14" height="22" rx="2"/><rect x="7" y="3" width="10" height="5" rx="1"/><text x="12" y="7.5" text-anchor="middle" font-size="4" fill="currentColor" stroke="none" font-family="monospace">1389</text><rect x="7" y="10" width="3" height="2.5" rx="0.5"/><rect x="10.5" y="10" width="3" height="2.5" rx="0.5"/><rect x="14" y="10" width="3" height="2.5" rx="0.5"/><rect x="7" y="13.5" width="3" height="2.5" rx="0.5"/><rect x="10.5" y="13.5" width="3" height="2.5" rx="0.5"/><rect x="14" y="13.5" width="3" height="2.5" rx="0.5"/><rect x="7" y="17" width="3" height="2.5" rx="0.5"/><rect x="10.5" y="17" width="3" height="2.5" rx="0.5"/><rect x="14" y="17" width="3" height="2.5" rx="0.5"/><rect x="7" y="20.5" width="3" height="1.5" rx="0.5"/><rect x="10.5" y="20.5" width="3" height="1.5" rx="0.5"/><rect x="14" y="20.5" width="3" height="1.5" rx="0.5"/></svg>',
-    // Data Core - 3D wireframe cube with crystal lines
-    files: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v10l9 5 9-5V7l-9-5z"/><path d="M12 12l9-5"/><path d="M12 12l-9-5"/><path d="M12 12v10"/><path d="M7.5 4.5L16.5 9.5"/><path d="M16.5 4.5L7.5 9.5"/><path d="M7.5 14.5l9 5"/><path d="M16.5 14.5l-9 5"/></svg>',
-    // Energon Radio - Boombox with speakers and handle
-    music: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M5 6V4h14v2"/><circle cx="7" cy="13" r="3"/><circle cx="17" cy="13" r="3"/><circle cx="7" cy="13" r="1"/><circle cx="17" cy="13" r="1"/><rect x="11" y="8" width="2" height="2" rx="0.5"/><rect x="11" y="11" width="2" height="2" rx="0.5"/><line x1="12" y1="8" x2="12" y2="6"/></svg>',
-    // Holo Archive - Folder/archive with horizontal lines
-    gallery: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18a1 1 0 0 1 1 1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a1 1 0 0 1 1-1z"/><path d="M3 6l3-3h6l2 3"/><line x1="6" y1="11" x2="18" y2="11"/><line x1="6" y1="14" x2="18" y2="14"/><line x1="6" y1="17" x2="14" y2="17"/></svg>',
-    // Systems - Gear/cog with teeth and inner circle
-    settings: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/><path d="M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/><path d="M7.5 4.5l1.5-.5M15 4l1.5 1M19.5 7.5l.5 1.5M20 15l-1 1.5M19.5 19.5l-1.5.5M9 20l-1.5-1M4.5 19.5l-.5-1.5M4 9l1-1.5"/></svg>',
-    // Cyber-Link - Network sharing nodes (3 circles connected)
-    browser: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>',
-    // Whisper - Headset with microphone
-    whisper: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
-    // About - Info circle with i
-    about: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
-    // Wallpaper - Landscape picture frame
-    wallpaper: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
-    // Cybertron Store - Shopping bag
-    store: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>',
-    // Optic Sensor - Eye with iris and pupil
-    camera: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1"/></svg>',
-    // Shorts - Film strip with sprocket holes and play button
-    shorts: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><rect x="3" y="3.5" width="3" height="2" rx="0.3"/><rect x="3" y="7" width="3" height="2" rx="0.3"/><rect x="3" y="17.5" width="3" height="2" rx="0.3"/><rect x="18" y="3.5" width="3" height="2" rx="0.3"/><rect x="18" y="7" width="3" height="2" rx="0.3"/><rect x="18" y="17.5" width="3" height="2" rx="0.3"/><polygon points="10,8.5 10,15.5 15.5,12" fill="currentColor" stroke="none"/></svg>',
-    folder: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>',
-    file: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>',
-    home: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-    download: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>',
-    check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
-    search: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
-    heart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
-    heartFilled: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
-    messageCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>',
-    share: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>',
-    shuffle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><path d="M4 20 21 3"/><polyline points="21 16 16 16 16 21"/><path d="M15 19 3 1"/></svg>',
-    play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
-    pause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>',
-    skipBack: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" x2="5" y1="19" y2="5"/></svg>',
-    skipForward: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></svg>',
-    arrowLeft: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>',
-    arrowRight: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
-    refresh: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>',
-    grid: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>',
-    list: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>',
-    star: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-    trash: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>',
-    checkCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>',
-    xCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>',
-    alertTriangle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
-    refreshBadge: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>',
-    volume: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
-    volumeX: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>',
-    weather: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0 .88-9.87A5.5 5.5 0 0 0 6.5 8 4 4 0 0 0 8 16h9z"/><line x1="16" y1="3" x2="16" y2="1"/><line x1="22" y1="8" x2="24" y2="8"/><line x1="20.5" y1="4.5" x2="22" y2="3"/><line x1="20.5" y1="11.5" x2="22" y2="13"/></svg>',
-    chronometer: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/><path d="M12 2v2"/><path d="M5 5l1.5 1.5"/><path d="M19 5l-1.5 1.5"/><line x1="5" y1="21" x2="7" y2="19"/><line x1="19" y1="21" x2="17" y2="19"/></svg>',
-    sparkCore: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>'
+    // Finder - blue face with two eyes and smile
+    notes: '<img src="icons/notes.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    calculator: '<img src="icons/calculator.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    files: '<img src="icons/files.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    music: '<img src="icons/music.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // Photos - colorful flower petals
+    gallery: '<img src="icons/photos.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // Safari - compass with red/white needle
+    browser: '<img src="icons/safari.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // Wallpaper - landscape with mountains and sun
+    wallpaper: '<img src="icons/wallpaper.png" width="32" height="32" style="border-radius:8px;object-fit:cover">' + '<svg width="32" height="32" viewBox="0 0 64 64" style="display:none"><rect x="2" y="2" width="60" height="60" rx="14" fill="#080c18" stroke="rgba(60,170,200,0.4)" stroke-width="2"/><rect x="2" y="2" width="60" height="28" rx="14" fill="rgba(50,150,180,0.07)"/><rect x="5" y="5" width="54" height="54" rx="11" fill="rgba(15,40,50,0.06)" stroke="rgba(50,130,160,0.12)" stroke-width="0.5"/><rect x="12" y="16" width="40" height="32" rx="4" fill="rgba(15,40,60,0.25)" stroke="rgba(70,180,210,0.4)" stroke-width="1.2"/><circle cx="22" cy="26" r="5" fill="rgba(60,160,190,0.25)" stroke="rgba(80,190,220,0.4)" stroke-width="0.8"/><path d="M12 42l10-8 7 5 10-10 13 9" fill="none" stroke="rgba(70,180,210,0.35)" stroke-width="1.2" stroke-linecap="round"/></svg>',
+
+    // App Store - blue A with line
+    store: '<img src="icons/appstore.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // FaceTime - green camera
+    camera: '<img src="icons/facetime.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // TV - apple tv logo
+    shorts: '<img src="icons/system.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // About - info circle with i
+    about: '<img src="icons/about.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // System Settings - gear
+    settings: '<img src="icons/TV.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+
+    // Small utility icons
+    weather: '<img src="icons/weather.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    clock: '<img src="icons/chronometer.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    sysmonitor: '<svg width="32" height="32" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="14" fill="#080c18" stroke="rgba(60,180,140,0.4)" stroke-width="2"/><rect x="2" y="2" width="60" height="28" rx="14" fill="rgba(50,160,120,0.07)"/><rect x="5" y="5" width="54" height="54" rx="11" fill="rgba(15,40,30,0.06)" stroke="rgba(50,140,110,0.12)" stroke-width="0.5"/><path d="M8 34l7-11 6 6 8-13 7 9 6-5" fill="none" stroke="rgba(70,210,170,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="34" r="2.5" fill="rgba(50,180,140,0.4)"/><circle cx="42" cy="29" r="2.5" fill="rgba(50,180,140,0.4)"/></svg>',
+    whisper: '<svg width="32" height="32" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="14" fill="#080c18" stroke="rgba(80,160,255,0.4)" stroke-width="2"/><rect x="2" y="2" width="60" height="28" rx="14" fill="rgba(60,140,220,0.07)"/><rect x="5" y="5" width="54" height="54" rx="11" fill="rgba(15,35,70,0.06)" stroke="rgba(60,120,200,0.12)" stroke-width="0.5"/><text x="18" y="42" font-size="28" fill="rgba(90,190,255,0.65)" font-family="monospace" font-weight="400">&gt;_</text></svg>',
+    folder: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-7.93a2 2 0 01-1.66-.9l-.82-1.2A2 2 0 007.93 3H4a2 2 0 00-2 2v13c0 1.1.9 2 2 2z"/></svg>',
+    file: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.45)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><path d="M14 2v4a2 2 0 002 2h4"/></svg>',
+    download: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>',
+    check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(100,200,160,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    search: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+    heart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(180,80,120,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>',
+    heartFilled: '<svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(180,80,120,0.5)" stroke="rgba(180,80,120,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>',
+    messageCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 104 16.1L2 22z"/></svg>',
+    share: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>',
+    shuffle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,160,240,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><path d="M4 20 21 3"/><polyline points="21 16 16 16 16 21"/><path d="M15 19 3 1"/></svg>',
+    play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(80,170,255,0.45)" stroke="rgba(100,190,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
+    pause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(80,170,255,0.45)" stroke="rgba(100,190,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>',
+    skipBack: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(90,160,240,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" x2="5" y1="19" y2="5"/></svg>',
+    skipForward: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(90,160,240,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></svg>',
+    arrowLeft: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>',
+    arrowRight: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+    refresh: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>',
+    grid: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>',
+    list: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>',
+    star: '<svg width="12" height="12" viewBox="0 0 24 24" fill="rgba(200,180,60,0.45)" stroke="rgba(220,200,80,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    trash: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>',
+    checkCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(80,200,160,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>',
+    xCircle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,80,80,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>',
+    alertTriangle: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,160,60,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 00-3.48 0l-8 14A2 2 0 004 21h16a2 2 0 001.73-3z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+    refreshBadge: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,180,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>',
+    volume: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(90,170,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>',
+    volumeX: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,80,80,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>',
+    chronometer: '<img src="icons/chronometer.png" width="32" height="32" style="border-radius:8px;object-fit:cover">',
+    sparkCore: '<img src="icons/sparkcore.png" width="28" height="28" style="border-radius:8px;object-fit:contain">'
 };
 
 // ── SOUND ENGINE (Web Audio API) ──
@@ -183,21 +190,21 @@ var CyberSound = (function() {
 
 // ── APPS REGISTRY ──
 var apps = {
-    notes:       { name: 'Mission Log',      icon: ICO.notes, width: 680, height: 460 },
-    calculator:  { name: 'Energon Calc',     icon: ICO.calculator, width: 350, height: 500 },
-    files:       { name: 'Data Core',        icon: ICO.files, width: 750, height: 500 },
-    music:       { name: 'Energon Radio',    icon: ICO.music, width: 400, height: 540 },
-    gallery:     { name: 'Holo Archive',     icon: ICO.gallery, width: 560, height: 460 },
-    settings:    { name: 'Systems',          icon: ICO.settings, width: 680, height: 500 },
-    browser:     { name: 'Cyber-Link',       icon: ICO.browser, width: 750, height: 520 },
-    about:       { name: 'About',            icon: ICO.about, width: 460, height: 500 },
-    wallpaper:   { name: 'Wallpaper',        icon: ICO.wallpaper, width: 700, height: 540 },
-    store:       { name: 'Cybertron Store',  icon: ICO.store, width: 700, height: 520 },
-    camera:      { name: 'Optic Sensor',     icon: ICO.camera, width: 640, height: 520 },
-    shorts:      { name: 'Shorts',      icon: ICO.shorts, width: 400, height: 680 },
-    weather:     { name: 'Energon Weather',  icon: ICO.about, width: 420, height: 500 },
-    clock:       { name: 'Chronometer',      icon: ICO.about, width: 380, height: 460 },
-    sysmonitor:  { name: 'Spark Core',       icon: ICO.settings, width: 520, height: 440 }
+    notes:       { name: 'Mission Log',       icon: ICO.notes, width: 680, height: 460 },
+    calculator:  { name: 'Energon Calc',      icon: ICO.calculator, width: 350, height: 500 },
+    files:       { name: 'Data Core',         icon: ICO.files, width: 750, height: 500 },
+    music:       { name: 'Energon Radio',     icon: ICO.music, width: 400, height: 540 },
+    gallery:     { name: 'Holo Archive',      icon: ICO.gallery, width: 560, height: 460 },
+    settings:    { name: 'Systems',           icon: ICO.settings, width: 680, height: 500 },
+    browser:     { name: 'Cyber-Link',        icon: ICO.browser, width: 750, height: 520 },
+    about:       { name: 'Intel Report',      icon: ICO.about, width: 460, height: 500 },
+    wallpaper:   { name: 'Wallpaper',         icon: ICO.wallpaper, width: 700, height: 540 },
+    store:       { name: 'Cybertron Store',   icon: ICO.store, width: 700, height: 520 },
+    camera:      { name: 'Optic Sensor',      icon: ICO.camera, width: 640, height: 520 },
+    shorts:      { name: 'Shorts',            icon: ICO.shorts, width: 400, height: 680 },
+    weather:     { name: 'Energon Weather',   icon: ICO.weather, width: 420, height: 500 },
+    clock:       { name: 'Chronometer',       icon: ICO.chronometer, width: 380, height: 460 },
+    sysmonitor:  { name: 'Spark Core',        icon: ICO.sparkCore, width: 520, height: 440 }
 };
 
 // â”€â”€ WALLPAPERS â”€â”€
@@ -206,11 +213,12 @@ var wallpapers = [
     { id: 'hatsune-miku',      name: 'Energon Grid',      file: SB_URL + '/wallpapers/hatsune-miku.mp4' },
     { id: 'neon-car',          name: 'Decepticon Lair',   file: SB_URL + '/wallpapers/neon-car.mp4' },
     { id: 'optimus',       name: 'Optimus Prime',     file: 'wallpapers/optimus.jpg' },
-    { id: 'download2',     name: 'Cybertron Alpha',   file: 'wallpapers/download2.jpg' },
     { id: 'download3',     name: 'Cybertron Beta',    file: 'wallpapers/download3.jpg' },
+    { id: 'carwall',      name: 'Car Wall',          file: 'wallpapers/carwall.jpg' },
+    { id: 'punkwall',      name: 'Punk Wall',         file: 'wallpapers/punkwall.jpg' },
 ];
 localStorage.removeItem('cybertron-wallpaper');
-var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'hatsune-miku';
+var currentWallpaper = localStorage.getItem('cybertron-wallpaper') || 'punkwall';
 
 // â”€â”€ DESKTOP ICONS â”€â”€
 var desktopIcons = [
@@ -225,7 +233,7 @@ var desktopIcons = [
     { app: 'store',     icon: ICO.store, label: 'Cybertron Store' },
     { app: 'camera',    icon: ICO.camera, label: 'Optic Sensor' },
     { app: 'shorts',    icon: ICO.shorts, label: 'Shorts' },
-    { app: 'about',     icon: ICO.about, label: 'About' }
+    { app: 'about',     icon: ICO.about, label: 'Intel Report' }
 ];
 
 // â”€â”€ DATA â”€â”€
@@ -257,34 +265,34 @@ var currentPath = '/cybertron/prime';
 var filesView = 'grid';
 var fileSystem = {
     '/cybertron/prime': [
-        { name: 'Intel Reports', type: 'folder', icon: ICO.folder },
-        { name: 'Holo Records',  type: 'folder', icon: ICO.folder },
-        { name: 'Frequencies',   type: 'folder', icon: ICO.folder },
-        { name: 'Transmissions', type: 'folder', icon: ICO.folder },
-        { name: 'Downloads',     type: 'folder', icon: ICO.folder },
-        { name: 'mission_log.txt', type: 'file', icon: ICO.file, size: '2 KB', modified: 'Today' },
-        { name: 'intel_brief.md',  type: 'file', icon: ICO.file, size: '1 KB', modified: 'Yesterday' }
+        { name: 'Intel Reports', type: 'folder', icon: '<span style="font-size:28px;color:rgba(255,179,71,0.5)">&#128193;</span>' },
+        { name: 'Holo Records',  type: 'folder', icon: '<span style="font-size:28px;color:rgba(255,179,71,0.5)">&#128193;</span>' },
+        { name: 'Frequencies',   type: 'folder', icon: '<span style="font-size:28px;color:rgba(255,179,71,0.5)">&#128193;</span>' },
+        { name: 'Transmissions', type: 'folder', icon: '<span style="font-size:28px;color:rgba(255,179,71,0.5)">&#128193;</span>' },
+        { name: 'Downloads',     type: 'folder', icon: '<span style="font-size:28px;color:rgba(255,179,71,0.5)">&#128193;</span>' },
+        { name: 'mission_log.txt', type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(160,180,200,0.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>', size: '2 KB', modified: 'Today' },
+        { name: 'intel_brief.md',  type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(160,180,200,0.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>', size: '1 KB', modified: 'Yesterday' }
     ],
     '/cybertron/prime/Intel Reports': [
-        { name: 'decepticon_activity.pdf',  type: 'file', icon: ICO.file, size: '2.4 MB', modified: 'Jun 15' },
-        { name: 'energon_levels.txt',       type: 'file', icon: ICO.file, size: '512 B', modified: 'Jun 14' },
-        { name: 'sector_scan.xlsx',         type: 'file', icon: ICO.file, size: '180 KB', modified: 'Jun 10' }
+        { name: 'decepticon_activity.pdf',  type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,80,80,0.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>', size: '2.4 MB', modified: 'Jun 15' },
+        { name: 'energon_levels.txt',       type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(160,180,200,0.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>', size: '512 B', modified: 'Jun 14' },
+        { name: 'sector_scan.xlsx',         type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(80,200,120,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>', size: '180 KB', modified: 'Jun 10' }
     ],
     '/cybertron/prime/Holo Records': [
-        { name: 'cybertron_skyline.jpg',  type: 'file', icon: ICO.gallery, size: '3.1 MB', modified: 'Jun 12' },
-        { name: 'optic_capture.png',      type: 'file', icon: ICO.camera, size: '890 KB', modified: 'Jun 16' },
-        { name: 'battle_record.jpg',      type: 'file', icon: ICO.camera, size: '4.5 MB', modified: 'Jun 08' }
+        { name: 'cybertron_skyline.jpg',  type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(100,180,240,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>', size: '3.1 MB', modified: 'Jun 12' },
+        { name: 'optic_capture.png',      type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(100,180,240,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>', size: '890 KB', modified: 'Jun 16' },
+        { name: 'battle_record.jpg',      type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(100,180,240,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>', size: '4.5 MB', modified: 'Jun 08' }
     ],
     '/cybertron/prime/Frequencies': [
-        { name: 'autobot_march.mp3', type: 'file', icon: ICO.music, size: '5.2 MB', modified: 'Jun 05' },
-        { name: 'energon_hum.mp3',   type: 'file', icon: ICO.music, size: '4.8 MB', modified: 'Jun 05' }
+        { name: 'autobot_march.mp3', type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(180,100,240,0.5)" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>', size: '5.2 MB', modified: 'Jun 05' },
+        { name: 'energon_hum.mp3',   type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(180,100,240,0.5)" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>', size: '4.8 MB', modified: 'Jun 05' }
     ],
     '/cybertron/prime/Transmissions': [
-        { name: 'transmission.mp4', type: 'file', icon: ICO.shorts, size: '28 MB', modified: 'Jun 01' }
+        { name: 'transmission.mp4', type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,100,100,0.5)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>', size: '28 MB', modified: 'Jun 01' }
     ],
     '/cybertron/prime/Downloads': [
-        { name: 'system_update.exe',  type: 'file', icon: ICO.download, size: '45 MB', modified: 'Jun 17' },
-        { name: 'data_archive.zip',   type: 'file', icon: ICO.download, size: '12 MB', modified: 'Jun 16' }
+        { name: 'system_update.exe',  type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,0.5)" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>', size: '45 MB', modified: 'Jun 17' },
+        { name: 'data_archive.zip',   type: 'file', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,160,60,0.5)" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>', size: '12 MB', modified: 'Jun 16' }
     ]
 };
 
@@ -299,8 +307,8 @@ var storeApps = [
     { id: 'browser', name: 'Cyber-Link', icon: ICO.browser, desc: 'Browse the Cybertron network', rating: 4.3, installed: true },
     { id: 'camera', name: 'Optic Sensor', icon: ICO.camera, desc: 'Capture visual recordings', rating: 4.1, installed: true },
     { id: 'shorts', name: 'Shorts', icon: ICO.shorts, desc: 'Watch short video transmissions', rating: 4.2, installed: true },
-    { id: 'wallpaper', name: 'Wallpaper Studio', icon: ICO.wallpaper, desc: 'Customize your desktop background', rating: 4.0, installed: true },
-    { id: 'about', name: 'About', icon: ICO.about, desc: 'View system information', rating: 4.6, installed: true },
+    { id: 'wallpaper', name: 'Wallpaper', icon: ICO.wallpaper, desc: 'Customize your desktop background', rating: 4.0, installed: true },
+    { id: 'about', name: 'Intel Report', icon: ICO.about, desc: 'View Autobot intelligence data', rating: 4.6, installed: true },
     { id: 'weather', name: 'Energon Weather', icon: ICO.weather, desc: 'Real-time Cybertronian weather data', rating: 4.7, installed: false },
     { id: 'clock', name: 'Chronometer', icon: ICO.chronometer, desc: 'Analog and digital time display', rating: 4.5, installed: false },
     { id: 'sysmonitor', name: 'Spark Core', icon: ICO.sparkCore, desc: 'Monitor CPU, RAM, and system health', rating: 4.8, installed: false }
@@ -354,13 +362,14 @@ function updateLockClock() {
 }
 
 function unlockDesktop() {
-    CyberSound.unlock();
+    try { CyberSound.unlock(); } catch(e) {}
     var lock = document.getElementById('lock-screen');
     lock.classList.add('unlocking');
     setTimeout(function() {
         lock.classList.add('hidden');
         lock.classList.remove('unlocking');
-        initDesktop();
+        try { initDesktop(); } catch(e) { console.error('initDesktop in unlock:', e); }
+        try { initPixelRobot(); } catch(e) {}
     }, 500);
 }
 
@@ -776,6 +785,9 @@ function openApp(appId) {
     el.style.top = (50 + (windows.length % 8) * 30) + 'px';
     el.style.zIndex = ++topZ;
     el.innerHTML =
+        '<div class="holo-scanline"></div>' +
+        '<div class="corner-tl"></div><div class="corner-tr"></div>' +
+        '<div class="corner-bl"></div><div class="corner-br"></div>' +
         '<div class="win-titlebar" data-win="' + id + '">' +
             '<span class="win-title">' + app.icon + ' ' + app.name + '</span>' +
             '<div class="win-controls">' +
@@ -1192,7 +1204,12 @@ function renderCCWallpapers() {
     var html = '';
     for (var i = 0; i < wallpapers.length; i++) {
         var wp = wallpapers[i];
-        html += '<video class="cc-wp-thumb' + (currentWallpaper === wp.id ? ' active' : '') + '" src="' + wp.file + '" muted preload="metadata" onclick="loadWallpaper(\'' + wp.id + '\');renderCCWallpapers()" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>';
+        var isVideo = wp.file.match(/\.(mp4|webm)$/i);
+        if (isVideo) {
+            html += '<video class="cc-wp-thumb' + (currentWallpaper === wp.id ? ' active' : '') + '" src="' + wp.file + '" muted preload="metadata" onclick="loadWallpaper(\'' + wp.id + '\');renderCCWallpapers()" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>';
+        } else {
+            html += '<img class="cc-wp-thumb' + (currentWallpaper === wp.id ? ' active' : '') + '" src="' + wp.file + '" onclick="loadWallpaper(\'' + wp.id + '\');renderCCWallpapers()">';
+        }
     }
     container.innerHTML = html;
 }
@@ -1688,6 +1705,7 @@ function renderFiles(body) {
     body.style.padding = '0';
     body.style.display = 'flex';
     body.style.flexDirection = 'column';
+    var homeActive = currentPath === '/cybertron/prime';
     body.innerHTML =
         '<div class="files-container">' +
             '<div class="files-toolbar">' +
@@ -1701,12 +1719,12 @@ function renderFiles(body) {
             '<div style="display:flex;flex:1;overflow:hidden;">' +
                 '<div class="files-sidebar">' +
                     '<div class="files-sidebar-label">Quick Access</div>' +
-                    '<div class="files-sidebar-item' + (currentPath === '/cybertron/prime' ? ' active' : '') + '" onclick="filesNavigate(\'/cybertron/prime\')">' + ICO.home + ' Prime Quarters</div>' +
-                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Intel Reports\')">' + ICO.folder + ' Intel Reports</div>' +
-                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Holo Records\')">' + ICO.gallery + ' Holo Records</div>' +
-                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Frequencies\')">' + ICO.music + ' Frequencies</div>' +
-                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Transmissions\')">' + ICO.shorts + ' Transmissions</div>' +
-                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Downloads\')">' + ICO.download + ' Downloads</div>' +
+                    '<div class="files-sidebar-item' + (homeActive ? ' active' : '') + '" onclick="filesNavigate(\'/cybertron/prime\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Prime Quarters</div>' +
+                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Intel Reports\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg> Intel Reports</div>' +
+                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Holo Records\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Holo Records</div>' +
+                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Frequencies\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Frequencies</div>' +
+                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Transmissions\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Transmissions</div>' +
+                    '<div class="files-sidebar-item" onclick="filesNavigate(\'/cybertron/prime/Downloads\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Downloads</div>' +
                 '</div>' +
                 '<div class="files-content" id="files-content"></div>' +
             '</div>' +
@@ -2083,8 +2101,12 @@ function settingsWallpapers() {
         '<div class="wp-none-card' + (active === 'none' ? ' active' : '') + '" onclick="loadWallpaper(\'none\');refreshSettingsWallpaper()">Cybertron Default</div>';
     for (var i = 0; i < wallpapers.length; i++) {
         var wp = wallpapers[i];
+        var isVideo = wp.file.match(/\.(mp4|webm)$/i);
+        var thumbTag = isVideo
+            ? '<video class="wallpaper-thumb" src="' + wp.file + '" muted preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>'
+            : '<img class="wallpaper-thumb" src="' + wp.file + '" loading="lazy">';
         html += '<div class="wallpaper-card' + (active === wp.id ? ' active' : '') + '" onclick="loadWallpaper(\'' + wp.id + '\');refreshSettingsWallpaper()">' +
-            '<video class="wallpaper-thumb" src="' + wp.file + '" muted preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>' +
+            thumbTag +
             '<div class="wallpaper-name">' + wp.name + '</div>' +
         '</div>';
     }
@@ -2164,369 +2186,152 @@ function toggleWidgets() {
 // CYBERTRON CALENDAR WIDGET
 // ═══════════════════════════════════════
 
-var calWidgetMonth = new Date().getMonth();
-var calWidgetYear = new Date().getFullYear();
-var calWidgetDrag = { active: false, offsetX: 0, offsetY: 0 };
+// Calendar widget removed
 
-function initCalendarWidget() {
-    var existing = document.getElementById('cybertron-calendar-widget');
-    if (existing) return;
+// Calendar widget removed
+function initCalendarWidget() {}
+function renderCalendarWidget() {}
+function calWidgetPrev() {}
+function calWidgetNext() {}
+function calWidgetGoToday() {}
+function calWidgetSelectDay() {}
+function closeCalendarWidget() {}
+function initCalendarWidgetDrag() {}
 
-    var widget = document.createElement('div');
-    widget.id = 'cybertron-calendar-widget';
-    widget.innerHTML =
-        '<div class="cal-widget-header" id="cal-widget-drag-handle">' +
-            '<div class="cal-widget-title">' +
-                '<span class="cal-widget-title-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>' +
-                '<span>STAR CALENDAR</span>' +
-            '</div>' +
-            '<div class="cal-widget-controls">' +
-                '<button class="cal-widget-btn" onclick="closeCalendarWidget()" title="Close">✕</button>' +
-            '</div>' +
-        '</div>' +
-        '<div class="cal-widget-month-row">' +
-            '<button class="cal-widget-nav-btn" onclick="calWidgetPrev()">‹</button>' +
-            '<span class="cal-widget-month-title" id="cal-widget-month-title"></span>' +
-            '<button class="cal-widget-nav-btn" onclick="calWidgetNext()">›</button>' +
-        '</div>' +
-        '<div class="cal-widget-grid" id="cal-widget-grid"></div>' +
-        '<div class="cal-widget-footer">' +
-            '<span class="cal-widget-today-info" id="cal-widget-today-info"></span>' +
-            '<button class="cal-widget-today-btn" onclick="calWidgetGoToday()">TODAY</button>' +
-        '</div>';
+// ═══════════════════════════════════════
+// PIXEL ROBOT — Cursor Companion
+// ═══════════════════════════════════════
 
-    document.body.appendChild(widget);
-    renderCalendarWidget();
-    initCalendarWidgetDrag();
-}
+var pixelRobot = null;
+var robotX = 0, robotY = 0;
+var robotMouseX = 0, robotMouseY = 0;
+var robotLag = 0.06;
+var robotFollowing = true;
+var robotFrameId = null;
 
-function renderCalendarWidget() {
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var dayNames = ['Su','Mo','Tu','We','Th','Fr','Sa'];
-    var today = new Date();
-    var year = calWidgetYear;
-    var month = calWidgetMonth;
-
-    // Update month title
-    var titleEl = document.getElementById('cal-widget-month-title');
-    if (titleEl) titleEl.textContent = months[month] + ' ' + year;
-
-    // Build grid
-    var grid = document.getElementById('cal-widget-grid');
-    if (!grid) return;
-
-    var html = '';
-    // Day headers
-    for (var d = 0; d < 7; d++) {
-        html += '<div class="cal-widget-day-header">' + dayNames[d] + '</div>';
-    }
-
-    // Previous month days
-    var firstDay = new Date(year, month, 1).getDay();
-    var daysInMonth = new Date(year, month + 1, 0).getDate();
-    var daysInPrev = new Date(year, month, 0).getDate();
-
-    for (var i = firstDay - 1; i >= 0; i--) {
-        html += '<div class="cal-widget-day other-month">' + (daysInPrev - i) + '</div>';
-    }
-
-    // Current month days
-    for (var day = 1; day <= daysInMonth; day++) {
-        var isToday = (day === today.getDate() && month === today.getMonth() && year === today.getFullYear());
-        html += '<div class="cal-widget-day' + (isToday ? ' today' : '') + '" onclick="calWidgetSelectDay(' + day + ')">' + day + '</div>';
-    }
-
-    // Next month days
-    var totalCells = firstDay + daysInMonth;
-    var remaining = (7 - (totalCells % 7)) % 7;
-    for (var n = 1; n <= remaining; n++) {
-        html += '<div class="cal-widget-day other-month">' + n + '</div>';
-    }
-
-    grid.innerHTML = html;
-
-    // Update today info
-    var infoEl = document.getElementById('cal-widget-today-info');
-    if (infoEl) {
-        var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        infoEl.innerHTML = '<strong>' + days[today.getDay()] + '</strong> · ' + months[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
-    }
-}
-
-function calWidgetPrev() {
-    calWidgetMonth--;
-    if (calWidgetMonth < 0) {
-        calWidgetMonth = 11;
-        calWidgetYear--;
-    }
-    renderCalendarWidget();
-}
-
-function calWidgetNext() {
-    calWidgetMonth++;
-    if (calWidgetMonth > 11) {
-        calWidgetMonth = 0;
-        calWidgetYear++;
-    }
-    renderCalendarWidget();
-}
-
-function calWidgetGoToday() {
-    var today = new Date();
-    calWidgetMonth = today.getMonth();
-    calWidgetYear = today.getFullYear();
-    renderCalendarWidget();
-}
-
-function calWidgetSelectDay(day) {
-    // Could add event creation here in the future
-    showToast('Star Calendar', 'Selected: ' + (calWidgetMonth + 1) + '/' + day + '/' + calWidgetYear, ICO.checkCircle);
-}
-
-function closeCalendarWidget() {
-    var widget = document.getElementById('cybertron-calendar-widget');
-    if (widget) widget.remove();
-}
-
-function initCalendarWidgetDrag() {
-    var widget = document.getElementById('cybertron-calendar-widget');
-    var handle = document.getElementById('cal-widget-drag-handle');
-    if (!widget || !handle) return;
-
-    handle.addEventListener('mousedown', function(e) {
-        if (e.target.tagName === 'BUTTON') return;
-        calWidgetDrag.active = true;
-        var rect = widget.getBoundingClientRect();
-        calWidgetDrag.offsetX = e.clientX - rect.left;
-        calWidgetDrag.offsetY = e.clientY - rect.top;
-        widget.style.cursor = 'grabbing';
-        widget.style.transition = 'none';
-        e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', function(e) {
-        if (!calWidgetDrag.active) return;
-        var x = e.clientX - calWidgetDrag.offsetX;
-        var y = e.clientY - calWidgetDrag.offsetY;
-        // Keep within viewport
-        x = Math.max(0, Math.min(x, window.innerWidth - widget.offsetWidth));
-        y = Math.max(0, Math.min(y, window.innerHeight - widget.offsetHeight));
-        widget.style.left = x + 'px';
-        widget.style.top = y + 'px';
-        widget.style.right = 'auto';
-        widget.style.bottom = 'auto';
-    });
-
-    document.addEventListener('mouseup', function() {
-        if (calWidgetDrag.active) {
-            calWidgetDrag.active = false;
-            widget.style.cursor = 'default';
-            widget.style.transition = '';
+function removeWhiteBg(img, callback) {
+    var canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth || img.width;
+    canvas.height = img.naturalHeight || img.height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        if (data[i] > 240 && data[i+1] > 240 && data[i+2] > 240) {
+            data[i+3] = 0;
         }
-    });
+    }
+    ctx.putImageData(imageData, 0, 0);
+    callback(canvas.toDataURL('image/png'));
 }
 
-// ═══════════════════════════════════════
-// PIXEL CAT — Cursor Companion (follows cursor)
-// ═══════════════════════════════════════
-
-var pixelCat = null;
-var catX = 0, catY = 0;
-var catPawTimer = null;
-var catPetCooldown = false;
-var catHovered = false;
-var mouseX = 0, mouseY = 0;
-var catLag = 0.04;
-var catPinned = false;
-var catClickTimer = null;
-
-function initPixelCat() {
-    // Remove existing cat if any
-    var existing = document.getElementById('pixel-cat');
+function initPixelRobot() {
+    var existing = document.getElementById('pixel-robot');
     if (existing) existing.remove();
 
-    pixelCat = document.createElement('div');
-    pixelCat.id = 'pixel-cat';
-    pixelCat.innerHTML = '<img src="catt.png" alt="pixel cat" draggable="false">';
-    pixelCat.title = 'Click to pin/unpin, double-click to pet!';
-    document.body.appendChild(pixelCat);
+    pixelRobot = document.createElement('div');
+    pixelRobot.id = 'pixel-robot';
+    var robotImg = new Image();
+    robotImg.src = 'pixelrobo.jpg';
+    robotImg.onload = function() {
+        removeWhiteBg(robotImg, function(dataUrl) {
+            pixelRobot.innerHTML = '<img src="' + dataUrl + '" alt="pixel robot" draggable="false">';
+        });
+    };
+    robotImg.onerror = function() {
+        pixelRobot.innerHTML = '<img src="pixelrobo.jpg" alt="pixel robot" draggable="false">';
+    };
+    pixelRobot.title = 'Click to stop/start following';
+    document.body.appendChild(pixelRobot);
 
-    // Start at center of screen
-    catX = window.innerWidth / 2;
-    catY = window.innerHeight / 2;
-    mouseX = catX;
-    mouseY = catY;
-    pixelCat.style.left = catX + 'px';
-    pixelCat.style.top = catY + 'px';
+    robotX = window.innerWidth / 2;
+    robotY = window.innerHeight / 2;
+    robotMouseX = robotX;
+    robotMouseY = robotY;
+    pixelRobot.style.left = robotX + 'px';
+    pixelRobot.style.top = robotY + 'px';
 
-    // Track cursor position
     document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        robotMouseX = e.clientX;
+        robotMouseY = e.clientY;
     });
 
-    // Hover detection
-    pixelCat.addEventListener('mouseenter', function() { catHovered = true; });
-    pixelCat.addEventListener('mouseleave', function() { catHovered = false; });
-
-    // Single click to pin/unpin, double-click to pet
-    pixelCat.addEventListener('click', function(e) {
+    pixelRobot.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (catClickTimer) {
-            // Double-click detected — pet the cat
-            clearTimeout(catClickTimer);
-            catClickTimer = null;
-            onCatPet(e);
+        robotFollowing = !robotFollowing;
+        pixelRobot.classList.toggle('robot-paused', !robotFollowing);
+        if (robotFollowing) {
+            pixelRobot.title = 'Click to stop following';
         } else {
-            // Wait to see if double-click follows
-            catClickTimer = setTimeout(function() {
-                catClickTimer = null;
-                // Single click — toggle pin
-                catPinned = !catPinned;
-                CyberSound.catPin();
-                pixelCat.classList.toggle('pinned', catPinned);
-                if (catPinned) {
-                    pixelCat.title = 'Pinned! Click to unpin';
-                    showToast('CyberCat', 'Cat pinned in place', '[pin]');
-                } else {
-                    pixelCat.title = 'Click to pin/unpin, double-click to pet!';
-                    showToast('CyberCat', 'Cat unpinned, following cursor', '[paw]');
-                }
-            }, 250);
+            pixelRobot.title = 'Click to resume following';
         }
     });
- 
-    // Start animation loop
-    requestAnimationFrame(animateCat);
+
+    if (robotFrameId) cancelAnimationFrame(robotFrameId);
+    animateRobot();
 }
 
-function animateCat() {
-    if (!pixelCat) return;
+function animateRobot() {
+    if (!pixelRobot) return;
 
-    if (!catPetCooldown && !catPinned) {
-        // Smooth follow behind cursor with lag
-        var targetX = mouseX + 18;
-        var targetY = mouseY + 18;
+    if (robotFollowing) {
+        var targetX = robotMouseX + 20;
+        var targetY = robotMouseY + 20;
 
-        var dx = targetX - catX;
-        var dy = targetY - catY;
+        var dx = targetX - robotX;
+        var dy = targetY - robotY;
 
-        catX += dx * catLag;
-        catY += dy * catLag;
+        robotX += dx * robotLag;
+        robotY += dy * robotLag;
     }
 
-    // Keep within viewport
-    catX = Math.max(0, Math.min(catX, window.innerWidth - 60));
-    catY = Math.max(0, Math.min(catY, window.innerHeight - 60));
+    robotX = Math.max(0, Math.min(robotX, window.innerWidth - 64));
+    robotY = Math.max(0, Math.min(robotY, window.innerHeight - 64));
 
-    pixelCat.style.left = catX + 'px';
-    pixelCat.style.top = catY + 'px';
+    pixelRobot.style.left = robotX + 'px';
+    pixelRobot.style.top = robotY + 'px';
 
-    // Flip cat based on movement direction
-    var dx = mouseX - catX;
-    if (dx < -2) {
-        pixelCat.style.transform = 'scaleX(-1)';
-    } else if (dx > 2) {
-        pixelCat.style.transform = 'scaleX(1)';
+    // Flip based on movement direction
+    var dirX = robotMouseX - robotX;
+    if (dirX < -2) {
+        pixelRobot.style.transform = 'scaleX(-1)';
+    } else if (dirX > 2) {
+        pixelRobot.style.transform = 'scaleX(1)';
     }
 
-    requestAnimationFrame(animateCat);
-}
-
-function onCatPet(e) {
-    e.stopPropagation();
-    if (catPetCooldown) return;
-    catPetCooldown = true;
-    CyberSound.catMeow();
-    setTimeout(function() { CyberSound.catPurr(); }, 200);
-
-    // Add petting animation
-    pixelCat.classList.add('petting');
-
-    // Create heart burst
-    pixelCat.classList.add('heart-burst');
-
-    // Create multiple floating hearts
-    for (var i = 0; i < 5; i++) {
-        (function(idx) {
-            setTimeout(function() {
-                createFloatingHeart(e.clientX + Math.random() * 30 - 15, e.clientY - 10);
-            }, idx * 100);
-        })(i);
-    }
-
-    // Create floating paw prints
-    createPawPrint(e.clientX, e.clientY);
-
-    // Remove animations after
-    setTimeout(function() {
-        if (pixelCat) {
-            pixelCat.classList.remove('petting');
-            pixelCat.classList.remove('heart-burst');
-        }
-        catPetCooldown = false;
-    }, 900);
-
-    // Show toast
-    showToast('Cyber-Cat', 'Purrrr... ❤️', '🐱');
-}
-
-function createFloatingHeart(x, y) {
-    var heart = document.createElement('div');
-    heart.className = 'cat-floating-heart';
-    heart.textContent = ['<svg width=... heart ...</svg>', '*', '*', '*', '*'][Math.floor(Math.random() * 5)];
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    heart.style.fontSize = (12 + Math.random() * 10) + 'px';
-    document.body.appendChild(heart);
-    setTimeout(function() { heart.remove(); }, 1200);
-}
-
-function createPawPrint(x, y) {
-    var paw = document.createElement('div');
-    paw.className = 'cat-paw-print';
-    paw.textContent = '[paw]';
-    paw.style.left = (x + Math.random() * 20 - 10) + 'px';
-    paw.style.top = (y + Math.random() * 20 - 10) + 'px';
-    document.body.appendChild(paw);
-    setTimeout(function() { paw.remove(); }, 1500);
-}
-
-function removePixelCat() {
-    if (pixelCat) {
-        pixelCat.remove();
-        pixelCat = null;
-    }
+    robotFrameId = requestAnimationFrame(animateRobot);
 }
 
 // Auto-init cat on desktop load
 function initDesktop() {
     // Apply saved theme
-    if (currentTheme && currentTheme !== 'default') {
-        document.body.className = 'theme-' + currentTheme;
-    }
+    try {
+        if (currentTheme && currentTheme !== 'default') {
+            document.body.className = 'theme-' + currentTheme;
+        }
+    } catch(e) {}
     notifications = [
         { icon: ICO.checkCircle, title: 'Systems Online', text: 'All Cybertronian systems operational', time: 'Just now' },
         { icon: ICO.refreshBadge, title: 'Energon Signal', text: 'Autobot communications active', time: '5m ago' },
         { icon: ICO.checkCircle, title: 'Perimeter Scan', text: 'No Decepticon activity detected', time: '1h ago' }
     ];
-    document.getElementById('desktop').classList.remove('hidden');
-    renderDesktopIcons();
-    initWallpaperEngine();
-    initClock();
-    initTopSearch();
-    initSystemStatus();
-    initContextMenu();
-    initKeyboardShortcuts();
-    initDesktopSelection();
-    renderStartMenuApps();
-    renderCalendar();
-    renderCCWallpapers();
-    initCalendarWidget();
-    initPixelCat();
-    addDesktopBranding();
-    updateDashboardWeather();
-    showToast('System', 'CYBERTRON OS online. Roll out!', ICO.checkCircle);
+    try { document.getElementById('desktop').classList.remove('hidden'); } catch(e) {}
+    try { renderDesktopIcons(); } catch(e) { console.error('renderDesktopIcons:', e); }
+    try { initWallpaperEngine(); } catch(e) { console.error('initWallpaperEngine:', e); }
+    try { initClock(); } catch(e) { console.error('initClock:', e); }
+    try { initTopSearch(); } catch(e) { console.error('initTopSearch:', e); }
+    try { initSystemStatus(); } catch(e) { console.error('initSystemStatus:', e); }
+    try { initContextMenu(); } catch(e) { console.error('initContextMenu:', e); }
+    try { initKeyboardShortcuts(); } catch(e) { console.error('initKeyboardShortcuts:', e); }
+    try { initDesktopSelection(); } catch(e) { console.error('initDesktopSelection:', e); }
+    try { renderStartMenuApps(); } catch(e) { console.error('renderStartMenuApps:', e); }
+    try { renderCalendar(); } catch(e) { console.error('renderCalendar:', e); }
+    try { renderCCWallpapers(); } catch(e) { console.error('renderCCWallpapers:', e); }
+    try { initPixelRobot(); } catch(e) { console.error('initPixelRobot:', e); }
+    try { addDesktopBranding(); } catch(e) { console.error('addDesktopBranding:', e); }
+    try { updateDashboardWeather(); } catch(e) { console.error('updateDashboardWeather:', e); }
+    try { showToast('System', 'CYBERTRON OS online. Roll out!', ICO.checkCircle); } catch(e) {}
 }
 
 // -- WEATHER APP --
@@ -2823,8 +2628,11 @@ function renderWallpaperApp(body) {
         }
     }
 
+    var isHeroVideo = heroSrc && heroSrc.match(/\.(mp4|webm)$/i);
     var heroHtml = heroSrc
-        ? '<div class="wp-app-hero"><video class="wp-hero-video" src="' + heroSrc + '" muted loop autoplay playsinline></video><div class="wp-app-hero-overlay"><div class="wp-app-hero-title">Wallpaper Studio</div><div class="wp-app-hero-sub">Current: ' + heroName + '</div></div></div>'
+        ? (isHeroVideo
+            ? '<div class="wp-app-hero"><video class="wp-hero-video" src="' + heroSrc + '" muted loop autoplay playsinline></video><div class="wp-app-hero-overlay"><div class="wp-app-hero-title">Wallpaper Studio</div><div class="wp-app-hero-sub">Current: ' + heroName + '</div></div></div>'
+            : '<div class="wp-app-hero"><img src="' + heroSrc + '" style="width:100%;height:100%;object-fit:cover"><div class="wp-app-hero-overlay"><div class="wp-app-hero-title">Wallpaper Studio</div><div class="wp-app-hero-sub">Current: ' + heroName + '</div></div></div>')
         : '<div class="wp-app-hero"><div class="wp-hero-gradient"></div><div class="wp-app-hero-overlay"><div class="wp-app-hero-title">Wallpaper Studio</div><div class="wp-app-hero-sub">Current: ' + heroName + '</div></div></div>';
 
     var cardsHtml =
@@ -2834,8 +2642,12 @@ function renderWallpaperApp(body) {
         '</div>';
     for (var i = 0; i < wallpapers.length; i++) {
         var wp = wallpapers[i];
+        var isVideo = wp.file.match(/\.(mp4|webm)$/i);
+        var previewTag = isVideo
+            ? '<video class="wp-app-preview" src="' + wp.file + '" muted preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>'
+            : '<img class="wp-app-preview" src="' + wp.file + '" loading="lazy">';
         cardsHtml += '<div class="wp-app-card' + (active === wp.id ? ' active' : '') + '" onclick="applyWallpaperFromApp(\'' + wp.id + '\')">' +
-            '<video class="wp-app-preview" src="' + wp.file + '" muted preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>' +
+            previewTag +
             '<div class="wp-app-info"><span class="wp-app-name">' + wp.name + '</span><span class="wp-app-badge">' + (active === wp.id ? 'ACTIVE' : '') + '</span></div>' +
         '</div>';
     }
@@ -2902,7 +2714,7 @@ function renderStore(body) {
 }
 
 function installStoreApp(appId, btn) {
-    CyberSound.install();
+    try { CyberSound.install(); } catch(e) {}
     btn.textContent = 'Installing...';
     btn.disabled = true;
     setTimeout(function() {
@@ -2913,8 +2725,14 @@ function installStoreApp(appId, btn) {
         for (var i = 0; i < storeApps.length; i++) {
             if (storeApps[i].id === appId) { appDef = storeApps[i]; break; }
         }
-        if (appDef && !apps[appId]) {
-            apps[appId] = { name: appDef.name, icon: appDef.icon, width: 500, height: 440 };
+        if (appDef) {
+            // Ensure app entry exists with correct icon and render function
+            if (!apps[appId]) {
+                apps[appId] = { name: appDef.name, icon: appDef.icon, width: 500, height: 440 };
+            } else {
+                apps[appId].icon = appDef.icon;
+                apps[appId].name = appDef.name;
+            }
         }
         var alreadyOnDesktop = false;
         for (var i = 0; i < desktopIcons.length; i++) {
@@ -2922,24 +2740,22 @@ function installStoreApp(appId, btn) {
         }
         if (!alreadyOnDesktop && appDef) {
             desktopIcons.push({ app: appId, icon: appDef.icon, label: appDef.name });
-            renderDesktopIcons();
         }
+        renderDesktopIcons();
         renderStartMenuApps();
         btn.textContent = 'Installed';
         btn.className = 'store-install-btn installed';
         btn.disabled = false;
-        showToast('Cybertron Store', appDef.name + ' deployed!', ICO.checkCircle);
-        // Re-render store to update icons
-        var storeWin = null;
+        try { showToast('Cybertron Store', appDef.name + ' deployed!', ICO.checkCircle); } catch(e) {}
+        // Re-render store
         for (var i = 0; i < windows.length; i++) {
-            if (windows[i].appId === 'store' && !windows[i].closed) { storeWin = windows[i]; break; }
+            if (windows[i].appId === 'store' && !windows[i].closed) {
+                var sb = document.getElementById('win-body-' + windows[i].id);
+                if (sb) renderStore(sb);
+                break;
+            }
         }
-        if (storeWin) {
-            var storeBody = document.getElementById('win-body-' + storeWin.id);
-            if (storeBody) renderStore(storeBody);
-        }
-        // Update dashboard weather visibility
-        updateDashboardWeather();
+        try { updateDashboardWeather(); } catch(e) {}
     }, 1500);
 }
 
@@ -3080,25 +2896,25 @@ function renderCameraGallery(el) {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 var shortsVideos = [
-    SB_URL + '/shorts/ere.mp4',
-    SB_URL + '/shorts/iio.mp4',
-    SB_URL + '/shorts/rrt.mp4',
-    SB_URL + '/shorts/tuy.mp4',
-    SB_URL + '/shorts/uui.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 .mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.2.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24..mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4',
-    SB_URL + '/shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4',
-    SB_URL + '/shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4',
-    SB_URL + '/shorts/yui.mp4',
-    SB_URL + '/shorts/yuuu.mp4'
+    'shorts/ere.mp4',
+    'shorts/iio.mp4',
+    'shorts/rrt.mp4',
+    'shorts/tuy.mp4',
+    'shorts/uui.mp4',
+    'shorts/WhatsApp Video 2026-07-06 .mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.17.39.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.17.392.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.17.4.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.2.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.22.30.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.22.31 (1).mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.22.39.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.24..mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.24.5.mp4',
+    'shorts/WhatsApp Video 2026-07-06 at 02.24.57.mp4',
+    'shorts/WhatsApp Video 22026-07-06 at 02.17.39.mp4',
+    'shorts/yui.mp4',
+    'shorts/yuuu.mp4'
 ];
 
 function shuffleShorts(array) {
@@ -3152,7 +2968,7 @@ function renderShorts(body) {
         feed.innerHTML =
             '<div class="shorts-reel">' +
                 '<video class="shorts-video" ' +
-                    'src="shorts/' + encodeURIComponent(videoFile) + '" ' +
+                    'src="' + videoFile + '" ' +
                     'playsinline loop preload="metadata" autoplay>' +
                 '</video>' +
                 '<div class="shorts-loading">Loading...</div>' +
@@ -3254,16 +3070,32 @@ function renderShorts(body) {
 
             // Tap to pause/play (YouTube-style)
             var pauseOverlay = feed.querySelector('.shorts-pause-overlay');
-            feed.querySelector('.shorts-reel').addEventListener('click', function(e) {
-                if (e.target.closest('.shorts-sound-btn') || e.target.closest('.shorts-actions') || e.target.closest('.shorts-info')) return;
+
+            function toggleShortsPause() {
                 if (videoEl.paused) {
-                    videoEl.play();
+                    var playPromise = videoEl.play();
+                    if (playPromise) playPromise.catch(function() {});
                     if (pauseOverlay) pauseOverlay.classList.remove('show');
                 } else {
                     videoEl.pause();
                     if (pauseOverlay) pauseOverlay.classList.add('show');
                 }
+            }
+
+            // Click on video directly
+            videoEl.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleShortsPause();
             });
+
+            // Click on reel (for areas around video)
+            var reelEl = feed.querySelector('.shorts-reel');
+            if (reelEl) {
+                reelEl.addEventListener('click', function(e) {
+                    if (e.target.closest('.shorts-sound-btn') || e.target.closest('.shorts-actions') || e.target.closest('.shorts-info') || e.target.closest('.shorts-video')) return;
+                    toggleShortsPause();
+                });
+            }
         }
     }
 
@@ -3321,4 +3153,12 @@ function renderShorts(body) {
 // INIT
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-window.addEventListener('load', function() { boot(); });
+window.addEventListener('load', function() {
+    try { boot(); } catch(e) { console.error('Boot error:', e); }
+    try { initPixelRobot(); } catch(e) { console.error('Robot init error:', e); }
+    setTimeout(function() {
+        if (!document.getElementById('pixel-robot')) {
+            try { initPixelRobot(); } catch(e) { console.error('Robot retry error:', e); }
+        }
+    }, 1000);
+});
